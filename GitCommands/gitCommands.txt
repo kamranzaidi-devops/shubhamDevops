@@ -1,0 +1,52 @@
+046  cd gitFolder/
+ 1047  ls
+ 1048  cd LinuxFolder
+ 1049  rm -rf LinuxFolder 
+ 1050  mkdir LinuxCommands
+ 1051  ls
+ 1052  cp /home/kamran/Learning/Day-1.txt /home/kamran/gitFolder/LinuxCommands/
+ 1053  ls
+ 1054  cd LinuxCommands/
+ 1055  ls
+ 1056  cd 
+ 1057  cd gitFolder/
+ 1058  cd ShellScripting/
+ 1059  ls
+ 1060  cd 
+ 1061  cd gitFolder/
+ 1062  git status
+ 1063  git add .
+ 1064  git status
+ 1065  rm -rf LinuxCommands/
+ 1066  git stauts
+ 1067  git stautus
+ 1068  git status
+ 1069  git restore LinuxCommands/Day-1.txt
+ 1070  git status
+ 1071  git config --global kamranzaidi-devops
+ 1072  git config --global user.name kamranzaidi-devops
+ 1073  cd .git
+ 1074  ls
+ 1075  cd 
+ 1076  cd gitFolder/
+ 1077  git log
+ 1078  git remote -v
+ 1079  git remote add origin https://github.com/kamranzaidi-devops/shubhamDevops.git
+ 1080  git remote -v
+ 1081  git status
+ 1082  git push origin main
+ 1083  git push origin master
+ 1084  git push -u origin master
+ 1085  git branch
+ 1086  git add .
+ 1087  git commit -m "First Commit"
+ 1088  git config --global user.name "kamranzaidi-devops"
+ 1089  git config --global user.email "kamran.zaidi1@outlook.com"
+ 1090  git log
+ 1091  git add .
+ 1092  git commit -m "First Commit"
+ 1093  git log
+ 1094  git remote -v
+ 1095  git push origin master
+ 1096  history
+
