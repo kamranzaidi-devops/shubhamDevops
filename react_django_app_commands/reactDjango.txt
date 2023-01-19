@@ -1,0 +1,271 @@
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ ls
+api  db.sqlite3  frontend  manage.py  README.md  requirements.txt  tests  todo_drf
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ vim DockerFile
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ docker build .
+unable to prepare context: unable to evaluate symlinks in Dockerfile path: lstat /home/kamran/gitFolder/react_django/react_django_demo_app/Dockerfile: no such file or directory
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ ls
+api  db.sqlite3  DockerFile  frontend  manage.py  README.md  requirements.txt  tests  todo_drf
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ vim DockerFile 
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ docker build .
+unable to prepare context: unable to evaluate symlinks in Dockerfile path: lstat /home/kamran/gitFolder/react_django/react_django_demo_app/Dockerfile: no such file or directory
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ cat DockerFile 
+FROM python:3.9
+
+COPY . .
+
+RUN pip install -r requirements.txt
+
+EXPOSE 8000
+
+CMD ["python","manage.py","runserver","0.0.0.0/8000"]
+
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ ^C
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ ^C
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ ^C
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ ^C
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ docker build /home/kamran/gitFolder/react_django/react_django_demo_app/Dockerfile
+unable to prepare context: path "/home/kamran/gitFolder/react_django/react_django_demo_app/Dockerfile" not found
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ cat DockerFile 
+FROM python:3.9
+
+COPY . .
+
+RUN pip install -r requirements.txt
+
+EXPOSE 8000
+
+CMD ["python","manage.py","runserver","0.0.0.0/8000"]
+
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ mv DockerFile /home/kamran/gitFolder/react_django/react_django_demo_app/Dockerfile
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ ls
+api  db.sqlite3  Dockerfile  frontend  manage.py  README.md  requirements.txt  tests  todo_drf
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ docker build .
+Sending build context to Docker daemon  2.666MB
+Step 1/5 : FROM python:3.9
+3.9: Pulling from library/python
+bbeef03cda1f: Pull complete 
+f049f75f014e: Pull complete 
+56261d0e6b05: Pull complete 
+9bd150679dbd: Pull complete 
+5b282ee9da04: Pull complete 
+03f027d5e312: Pull complete 
+3c8304b923fa: Pull complete 
+1f510f0937ac: Pull complete 
+cb0f5bf32016: Pull complete 
+Digest: sha256:4b7ee97f021e0d1f5749ea3ad6d1bae1ca15a9b42cdebcf40269502d54f56666
+Status: Downloaded newer image for python:3.9
+ ---> b05aba0a4b15
+Step 2/5 : COPY . .
+ ---> e2db50db50ba
+Step 3/5 : RUN pip install -r requirements.txt
+ ---> Running in d5d2cad84e54
+Collecting asgiref==3.2.3
+  Downloading asgiref-3.2.3-py2.py3-none-any.whl (18 kB)
+Collecting Django==3.0.3
+  Downloading Django-3.0.3-py3-none-any.whl (7.5 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.5/7.5 MB 14.4 MB/s eta 0:00:00
+Collecting django-cors-headers==3.2.1
+  Downloading django_cors_headers-3.2.1-py3-none-any.whl (14 kB)
+Collecting djangorestframework==3.11.0
+  Downloading djangorestframework-3.11.0-py3-none-any.whl (911 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 911.2/911.2 KB 67.5 MB/s eta 0:00:00
+Collecting pytz==2019.3
+  Downloading pytz-2019.3-py2.py3-none-any.whl (509 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 509.2/509.2 KB 78.1 MB/s eta 0:00:00
+Collecting sqlparse==0.3.0
+  Downloading sqlparse-0.3.0-py2.py3-none-any.whl (39 kB)
+Installing collected packages: pytz, asgiref, sqlparse, Django, djangorestframework, django-cors-headers
+Successfully installed Django-3.0.3 asgiref-3.2.3 django-cors-headers-3.2.1 djangorestframework-3.11.0 pytz-2019.3 sqlparse-0.3.0
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+WARNING: You are using pip version 22.0.4; however, version 22.3.1 is available.
+You should consider upgrading via the '/usr/local/bin/python -m pip install --upgrade pip' command.
+Removing intermediate container d5d2cad84e54
+ ---> 5a5a8fb966e5
+Step 4/5 : EXPOSE 8000
+ ---> Running in 7f4382bb17b7
+Removing intermediate container 7f4382bb17b7
+ ---> 0f101b8e75b1
+Step 5/5 : CMD ["python","manage.py","runserver","0.0.0.0/8000"]
+ ---> Running in e1e6ae8abe65
+Removing intermediate container e1e6ae8abe65
+ ---> 8080ba4ce283
+Successfully built 8080ba4ce283
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ docker ps 
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ docker images
+REPOSITORY        TAG       IMAGE ID       CREATED          SIZE
+<none>            <none>    8080ba4ce283   11 seconds ago   962MB
+python            3.9       b05aba0a4b15   28 hours ago     915MB
+nginx             latest    a99a39d070bf   8 days ago       142MB
+jenkins/jenkins   latest    740c3777c92a   8 days ago       469MB
+mysql             latest    7484689f290f   6 weeks ago      538MB
+hello-world       latest    feb5d9fea6a5   16 months ago    13.3kB
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ docker build . -t django-app:latest
+Sending build context to Docker daemon  2.666MB
+Step 1/5 : FROM python:3.9
+ ---> b05aba0a4b15
+Step 2/5 : COPY . .
+ ---> Using cache
+ ---> e2db50db50ba
+Step 3/5 : RUN pip install -r requirements.txt
+ ---> Using cache
+ ---> 5a5a8fb966e5
+Step 4/5 : EXPOSE 8000
+ ---> Using cache
+ ---> 0f101b8e75b1
+Step 5/5 : CMD ["python","manage.py","runserver","0.0.0.0/8000"]
+ ---> Using cache
+ ---> 8080ba4ce283
+Successfully built 8080ba4ce283
+Successfully tagged django-app:latest
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ docker images
+REPOSITORY        TAG       IMAGE ID       CREATED          SIZE
+django-app        latest    8080ba4ce283   46 seconds ago   962MB
+python            3.9       b05aba0a4b15   28 hours ago     915MB
+nginx             latest    a99a39d070bf   8 days ago       142MB
+jenkins/jenkins   latest    740c3777c92a   8 days ago       469MB
+mysql             latest    7484689f290f   6 weeks ago      538MB
+hello-world       latest    feb5d9fea6a5   16 months ago    13.3kB
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ docker run -d -p 8000:8000 8080ba4ce283
+48c61e8b0c3f2b05df54e2c8891fa3775e11ed327e5c4552052f98376d146769
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ docker ps 
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ docker ps -a 
+CONTAINER ID   IMAGE                    COMMAND                  CREATED          STATUS                      PORTS     NAMES
+48c61e8b0c3f   8080ba4ce283             "python manage.py ru…"   17 seconds ago   Exited (1) 16 seconds ago             hungry_noyce
+dc6a0bde04cd   nginx:latest             "/docker-entrypoint.…"   2 days ago       Exited (0) 2 days ago                 mynginx
+8a6e21a0ad92   jenkins/jenkins:latest   "/usr/bin/tini -- /u…"   3 days ago       Exited (143) 2 days ago               myjenkins
+093d31a7bd23   mysql:latest             "docker-entrypoint.s…"   3 days ago       Exited (0) 2 days ago                 myDb
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ docker run -d -p 8000:8000 django-app
+0dadc7681f9f2a24b77ca6669c5e135a038341c38f63ef22a9790bddbb4b9f2f
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ docker ps 
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ docker ps - a
+"docker ps" accepts no arguments.
+See 'docker ps --help'.
+
+Usage:  docker ps [OPTIONS]
+
+List containers
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ docker ps -a
+CONTAINER ID   IMAGE                    COMMAND                  CREATED              STATUS                          PORTS     NAMES
+0dadc7681f9f   django-app               "python manage.py ru…"   28 seconds ago       Exited (1) 27 seconds ago                 nice_thompson
+48c61e8b0c3f   8080ba4ce283             "python manage.py ru…"   About a minute ago   Exited (1) About a minute ago             hungry_noyce
+dc6a0bde04cd   nginx:latest             "/docker-entrypoint.…"   2 days ago           Exited (0) 2 days ago                     mynginx
+8a6e21a0ad92   jenkins/jenkins:latest   "/usr/bin/tini -- /u…"   3 days ago           Exited (143) 2 days ago                   myjenkins
+093d31a7bd23   mysql:latest             "docker-entrypoint.s…"   3 days ago           Exited (0) 2 days ago                     myDb
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ docker images
+REPOSITORY        TAG       IMAGE ID       CREATED         SIZE
+django-app        latest    8080ba4ce283   3 minutes ago   962MB
+python            3.9       b05aba0a4b15   28 hours ago    915MB
+nginx             latest    a99a39d070bf   8 days ago      142MB
+jenkins/jenkins   latest    740c3777c92a   8 days ago      469MB
+mysql             latest    7484689f290f   6 weeks ago     538MB
+hello-world       latest    feb5d9fea6a5   16 months ago   13.3kB
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ cat Dockerfile 
+FROM python:3.9
+
+COPY . .
+
+RUN pip install -r requirements.txt
+
+EXPOSE 8000
+
+CMD ["python","manage.py","runserver","0.0.0.0/8000"]
+
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ vim Dockerfile 
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ docker rm django-app
+Error: No such container: django-app
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ docker rm images django-app
+Error: No such container: images
+Error: No such container: django-app
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ docker image rm 8080ba4ce283
+Error response from daemon: conflict: unable to delete 8080ba4ce283 (must be forced) - image is being used by stopped container 48c61e8b0c3f
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ docker ps 
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ docker ps -a
+CONTAINER ID   IMAGE                    COMMAND                  CREATED         STATUS                     PORTS     NAMES
+0dadc7681f9f   django-app               "python manage.py ru…"   3 minutes ago   Exited (1) 3 minutes ago             nice_thompson
+48c61e8b0c3f   8080ba4ce283             "python manage.py ru…"   4 minutes ago   Exited (1) 4 minutes ago             hungry_noyce
+dc6a0bde04cd   nginx:latest             "/docker-entrypoint.…"   2 days ago      Exited (0) 2 days ago                mynginx
+8a6e21a0ad92   jenkins/jenkins:latest   "/usr/bin/tini -- /u…"   3 days ago      Exited (143) 2 days ago              myjenkins
+093d31a7bd23   mysql:latest             "docker-entrypoint.s…"   3 days ago      Exited (0) 2 days ago                myDb
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ docker stop 0dadc7681f9f
+0dadc7681f9f
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ docker rm 0dadc7681f9f
+0dadc7681f9f
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ docker stop 48c61e8b0c3f
+48c61e8b0c3f
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ docker rm 48c61e8b0c3f
+48c61e8b0c3f
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ docker image rm 8080ba4ce283
+Untagged: django-app:latest
+Deleted: sha256:8080ba4ce2835c00208d08023851aa25852e15caf74fd129f745fa527e8bfd3a
+Deleted: sha256:0f101b8e75b14dd9cef67e0cb75003e1eb4bc53dc2b0af1a75b2370bbf74dad4
+Deleted: sha256:5a5a8fb966e50527cc8bc35cec5469645eef29d75688e3e6f77f06509266eac0
+Deleted: sha256:2e647a906e3d3e52100d9b15bca25e8d59dcfee1ba4b3aadbfbde218ab2d0a93
+Deleted: sha256:e2db50db50bafa62b390538099c1403b503daae50a9482bbb00e3191289b07bf
+Deleted: sha256:a5b78336a20ebc459aae03ece3210f44c36fcc452dcc5b25c198c294c607c4ee
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ docker images
+REPOSITORY        TAG       IMAGE ID       CREATED         SIZE
+python            3.9       b05aba0a4b15   28 hours ago    915MB
+nginx             latest    a99a39d070bf   8 days ago      142MB
+jenkins/jenkins   latest    740c3777c92a   8 days ago      469MB
+mysql             latest    7484689f290f   6 weeks ago     538MB
+hello-world       latest    feb5d9fea6a5   16 months ago   13.3kB
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ docker build . -t django-app
+Sending build context to Docker daemon  2.666MB
+Step 1/5 : FROM python:3.9
+ ---> b05aba0a4b15
+Step 2/5 : COPY . .
+ ---> e6f887d41aa9
+Step 3/5 : RUN pip install -r requirements.txt
+ ---> Running in 926601edb16d
+Collecting asgiref==3.2.3
+  Downloading asgiref-3.2.3-py2.py3-none-any.whl (18 kB)
+Collecting Django==3.0.3
+  Downloading Django-3.0.3-py3-none-any.whl (7.5 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.5/7.5 MB 17.2 MB/s eta 0:00:00
+Collecting django-cors-headers==3.2.1
+  Downloading django_cors_headers-3.2.1-py3-none-any.whl (14 kB)
+Collecting djangorestframework==3.11.0
+  Downloading djangorestframework-3.11.0-py3-none-any.whl (911 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 911.2/911.2 KB 52.6 MB/s eta 0:00:00
+Collecting pytz==2019.3
+  Downloading pytz-2019.3-py2.py3-none-any.whl (509 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 509.2/509.2 KB 60.2 MB/s eta 0:00:00
+Collecting sqlparse==0.3.0
+  Downloading sqlparse-0.3.0-py2.py3-none-any.whl (39 kB)
+Installing collected packages: pytz, asgiref, sqlparse, Django, djangorestframework, django-cors-headers
+Successfully installed Django-3.0.3 asgiref-3.2.3 django-cors-headers-3.2.1 djangorestframework-3.11.0 pytz-2019.3 sqlparse-0.3.0
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+WARNING: You are using pip version 22.0.4; however, version 22.3.1 is available.
+You should consider upgrading via the '/usr/local/bin/python -m pip install --upgrade pip' command.
+Removing intermediate container 926601edb16d
+ ---> f4b907f26e2d
+Step 4/5 : EXPOSE 8000
+ ---> Running in ad472fe9c7e0
+Removing intermediate container ad472fe9c7e0
+ ---> 7bfb15612e31
+Step 5/5 : CMD ["python","manage.py","runserver","0.0.0.0:8000"]
+ ---> Running in 475df11857fb
+Removing intermediate container 475df11857fb
+ ---> 9d996f90db8f
+Successfully built 9d996f90db8f
+Successfully tagged django-app:latest
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ docker images
+REPOSITORY        TAG       IMAGE ID       CREATED         SIZE
+django-app        latest    9d996f90db8f   5 seconds ago   962MB
+python            3.9       b05aba0a4b15   28 hours ago    915MB
+nginx             latest    a99a39d070bf   8 days ago      142MB
+jenkins/jenkins   latest    740c3777c92a   8 days ago      469MB
+mysql             latest    7484689f290f   6 weeks ago     538MB
+hello-world       latest    feb5d9fea6a5   16 months ago   13.3kB
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ docker run -d -p 8000:8000 django-app
+ccaa4a98320caf1cf7d84c26a9ceca9634aead693cc7930e730722b9f0d942b6
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ docker ps 
+CONTAINER ID   IMAGE        COMMAND                  CREATED         STATUS         PORTS                                       NAMES
+ccaa4a98320c   django-app   "python manage.py ru…"   3 seconds ago   Up 2 seconds   0.0.0.0:8000->8000/tcp, :::8000->8000/tcp   silly_satoshi
+kamran@kamran-System-Product-Name:~/gitFolder/react_django/react_django_demo_app$ 
+
+
