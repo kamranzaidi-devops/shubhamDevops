@@ -1,0 +1,97 @@
+========================================CREATE A VOLMUME=========================================
+
+kamran@kamran-System-Product-Name:~/DeployApps/volumes$ mkdir react_django
+kamran@kamran-System-Product-Name:~/DeployApps/volumes$ docker volume create --name react_django --opt device=/home/kamran/DeployApps/volumes/react_django --opt o=bind --opt type=none
+react_django
+kamran@kamran-System-Product-Name:~/DeployApps/volumes$ ls
+react_django  react_django_volume
+kamran@kamran-System-Product-Name:~/DeployApps/volumes$ docker volume inspect react_django
+[
+    {
+        "CreatedAt": "2023-01-25T12:04:20+05:30",
+        "Driver": "local",
+        "Labels": {},
+        "Mountpoint": "/var/lib/docker/volumes/react_django/_data",
+        "Name": "react_django",
+        "Options": {
+            "device": "/home/kamran/DeployApps/volumes/react_django",
+            "o": "bind",
+            "type": "none"
+        },
+        "Scope": "local"
+    }
+]
+kamran@kamran-System-Product-Name:~/DeployApps/volumes$ dokcker ps 
+
+
+
+========================================== Mount A CONTAINER WITH VOLUME=======================================
+
+
+kamran@kamran-System-Product-Name:~/DeployApps$ cd node-todo-cicd/
+
+kamran@kamran-System-Product-Name:~/DeployApps/node-todo-cicd$ ls
+app.js  Dockerfile  package.json  package-lock.json  Readme.md  README.md  views
+
+kamran@kamran-System-Product-Name:~/DeployApps/node-todo-cicd$ vim Dockerfile 
+kamran@kamran-System-Product-Name:~/DeployApps/node-todo-cicd$ docker build . -t node-js-project
+Sending build context to Docker daemon  375.3kB
+Step 1/6 : FROM node:12.2.0-alpine
+ ---> f391dabf9dce
+Step 2/6 : WORKDIR app
+ ---> Running in fe8d551dfd9f
+Removing intermediate container fe8d551dfd9f
+ ---> e806fd0cc4a9
+Step 3/6 : COPY . .
+ ---> e181c8452747
+Step 4/6 : RUN npm install
+ ---> Running in a495064019c1
+npm WARN read-shrinkwrap This version of npm is compatible with lockfileVersion@1, but package-lock.json was generated for lockfileVersion@2. I'll try to do my best with it!
+
+> ejs@2.7.4 postinstall /app/node_modules/ejs
+> node ./postinstall.js
+
+Thank you for installing EJS: built with the Jake JavaScript build tool (https://jakejs.com/)
+
+npm WARN my-todolist@0.1.0 No repository field.
+npm WARN my-todolist@0.1.0 No license field.
+
+added 291 packages from 653 contributors and audited 291 packages in 2.938s
+found 7 vulnerabilities (1 moderate, 4 high, 2 critical)
+  run `npm audit fix` to fix them, or `npm audit` for details
+Removing intermediate container a495064019c1
+ ---> cbded57a54a0
+Step 5/6 : EXPOSE 8000
+ ---> Running in 726d4a99b35b
+Removing intermediate container 726d4a99b35b
+ ---> facf03620a78
+Step 6/6 : CMD ["node", "app.js", "nohup", "bash", "args", ">", "output.log", "2>&1", "&"]
+ ---> Running in 1690ea709965
+Removing intermediate container 1690ea709965
+ ---> bed5b11d2cd6
+Successfully built bed5b11d2cd6
+Successfully tagged node-js-project:latest
+kamran@kamran-System-Product-Name:~/DeployApps/node-todo-cicd$ docker images
+REPOSITORY        TAG             IMAGE ID       CREATED          SIZE
+node-js-project   latest          bed5b11d2cd6   14 seconds ago   104MB
+python            3.9             b05aba0a4b15   7 days ago       915MB
+nginx             latest          a99a39d070bf   2 weeks ago      142MB
+mysql             latest          7484689f290f   7 weeks ago      538MB
+hello-world       latest          feb5d9fea6a5   16 months ago    13.3kB
+node              12.2.0-alpine   f391dabf9dce   3 years ago      77.7MB
+kamran@kamran-System-Product-Name:~/DeployApps/node-todo-cicd$ docker run -d --name node-js-cttr -p 8000:8000 --mount source=react_django,target/app node-js-project:latest
+invalid argument "source=react_django,target/app" for "--mount" flag: invalid field 'target/app' must be a key=value pair
+See 'docker run --help'.
+kamran@kamran-System-Product-Name:~/DeployApps/node-todo-cicd$ docker run -d --name node-js-cttr -p 8000:8000 --mount source=react_django,target=/app node-js-project:latest
+4230fbc1eb89e6687bea621a0726285079991fdc896c94a67fcb36c3f0e267ee
+kamran@kamran-System-Product-Name:~/DeployApps/node-todo-cicd$ docker ps 
+CONTAINER ID   IMAGE                    COMMAND                  CREATED         STATUS         PORTS                                       NAMES
+4230fbc1eb89   node-js-project:latest   "node app.js nohup b…"   3 seconds ago   Up 2 seconds   0.0.0.0:8000->8000/tcp, :::8000->8000/tcp   node-js-cttr
+kamran@kamran-System-Product-Name:~/DeployApps/node-todo-cicd$ cd ..
+kamran@kamran-System-Product-Name:~/DeployApps$ cd volumes/
+kamran@kamran-System-Product-Name:~/DeployApps/volumes$ ls
+react_django  react_django_volume
+kamran@kamran-System-Product-Name:~/DeployApps/volumes$ cd react_django
+kamran@kamran-System-Product-Name:~/DeployApps/volumes/react_django$ ls
+app.js  Dockerfile  node_modules  package.json  package-lock.json  Readme.md  README.md  views
+
