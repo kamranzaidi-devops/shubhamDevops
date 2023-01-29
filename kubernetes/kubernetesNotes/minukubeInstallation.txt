@@ -1,0 +1,535 @@
+kamran@kamran-System-Product-Name:~$ curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 77.3M  100 77.3M    0     0  20.8M      0  0:00:03  0:00:03 --:--:-- 20.8M
+[sudo] password for kamran: 
+kamran@kamran-System-Product-Name:~$ minikube start
+😄  minikube v1.29.0 on Ubuntu 22.04
+✨  Using the docker driver based on existing profile
+👍  Starting control plane node minikube in cluster minikube
+🚜  Pulling base image ...
+🏃  Updating the running docker "minikube" container ...
+❗  This container is having trouble accessing https://registry.k8s.io
+💡  To pull new external images, you may need to configure a proxy: https://minikube.sigs.k8s.io/docs/reference/networking/proxy/
+🐳  Preparing Kubernetes v1.26.1 on Docker 20.10.23 ...
+🤦  Unable to restart cluster, will reset it: apiserver healthz: apiserver process never appeared
+    ▪ Generating certificates and keys ...
+    ▪ Booting up control plane ...
+💢  initialization failed, will try again: wait: /bin/bash -c "sudo env PATH="/var/lib/minikube/binaries/v1.26.1:$PATH" kubeadm init --config /var/tmp/minikube/kubeadm.yaml  --ignore-preflight-errors=DirAvailable--etc-kubernetes-manifests,DirAvailable--var-lib-minikube,DirAvailable--var-lib-minikube-etcd,FileAvailable--etc-kubernetes-manifests-kube-scheduler.yaml,FileAvailable--etc-kubernetes-manifests-kube-apiserver.yaml,FileAvailable--etc-kubernetes-manifests-kube-controller-manager.yaml,FileAvailable--etc-kubernetes-manifests-etcd.yaml,Port-10250,Swap,NumCPU,Mem,SystemVerification,FileContent--proc-sys-net-bridge-bridge-nf-call-iptables": Process exited with status 1
+stdout:
+[init] Using Kubernetes version: v1.26.1
+[preflight] Running pre-flight checks
+[preflight] The system verification failed. Printing the output from the verification:
+KERNEL_VERSION: 5.15.0-58-generic
+OS: Linux
+CGROUPS_CPU: enabled
+CGROUPS_CPUSET: enabled
+CGROUPS_DEVICES: enabled
+CGROUPS_FREEZER: enabled
+CGROUPS_MEMORY: enabled
+CGROUPS_PIDS: enabled
+CGROUPS_HUGETLB: enabled
+CGROUPS_IO: enabled
+[preflight] Pulling images required for setting up a Kubernetes cluster
+[preflight] This might take a minute or two, depending on the speed of your internet connection
+[preflight] You can also perform this action in beforehand using 'kubeadm config images pull'
+[certs] Using certificateDir folder "/var/lib/minikube/certs"
+[certs] Using existing ca certificate authority
+[certs] Using existing apiserver certificate and key on disk
+[certs] Using existing apiserver-kubelet-client certificate and key on disk
+[certs] Using existing front-proxy-ca certificate authority
+[certs] Using existing front-proxy-client certificate and key on disk
+[certs] Using existing etcd/ca certificate authority
+[certs] Using existing etcd/server certificate and key on disk
+[certs] Using existing etcd/peer certificate and key on disk
+[certs] Using existing etcd/healthcheck-client certificate and key on disk
+[certs] Using existing apiserver-etcd-client certificate and key on disk
+[certs] Using the existing "sa" key
+[kubeconfig] Using kubeconfig folder "/etc/kubernetes"
+[kubeconfig] Writing "admin.conf" kubeconfig file
+[kubeconfig] Writing "kubelet.conf" kubeconfig file
+[kubeconfig] Writing "controller-manager.conf" kubeconfig file
+[kubeconfig] Writing "scheduler.conf" kubeconfig file
+[kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+[kubelet-start] Starting the kubelet
+[control-plane] Using manifest folder "/etc/kubernetes/manifests"
+[control-plane] Creating static Pod manifest for "kube-apiserver"
+[control-plane] Creating static Pod manifest for "kube-controller-manager"
+[control-plane] Creating static Pod manifest for "kube-scheduler"
+[etcd] Creating static Pod manifest for local etcd in "/etc/kubernetes/manifests"
+[wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory "/etc/kubernetes/manifests". This can take up to 4m0s
+[kubelet-check] Initial timeout of 40s passed.
+
+Unfortunately, an error has occurred:
+	timed out waiting for the condition
+
+This error is likely caused by:
+	- The kubelet is not running
+	- The kubelet is unhealthy due to a misconfiguration of the node in some way (required cgroups disabled)
+
+If you are on a systemd-powered system, you can try to troubleshoot the error with the following commands:
+	- 'systemctl status kubelet'
+	- 'journalctl -xeu kubelet'
+
+Additionally, a control plane component may have crashed or exited when started by the container runtime.
+To troubleshoot, list all containers using your preferred container runtimes CLI.
+Here is one example how you may list all running Kubernetes containers by using crictl:
+	- 'crictl --runtime-endpoint unix:///var/run/cri-dockerd.sock ps -a | grep kube | grep -v pause'
+	Once you have found the failing container, you can inspect its logs with:
+	- 'crictl --runtime-endpoint unix:///var/run/cri-dockerd.sock logs CONTAINERID'
+
+stderr:
+W0128 05:27:52.468439   17836 initconfiguration.go:119] Usage of CRI endpoints without URL scheme is deprecated and can cause kubelet errors in the future. Automatically prepending scheme "unix" to the "criSocket" with value "/var/run/cri-dockerd.sock". Please update your configuration!
+	[WARNING Swap]: swap is enabled; production deployments should disable swap unless testing the NodeSwap feature gate of the kubelet
+	[WARNING SystemVerification]: failed to parse kernel config: unable to load kernel module: "configs", output: "modprobe: FATAL: Module configs not found in directory /lib/modules/5.15.0-58-generic\n", err: exit status 1
+	[WARNING Service-Kubelet]: kubelet service is not enabled, please run 'systemctl enable kubelet.service'
+error execution phase wait-control-plane: couldn't initialize a Kubernetes cluster
+To see the stack trace of this error execute with --v=5 or higher
+
+    ▪ Generating certificates and keys ...
+    ▪ Booting up control plane ...
+
+💣  Error starting cluster: wait: /bin/bash -c "sudo env PATH="/var/lib/minikube/binaries/v1.26.1:$PATH" kubeadm init --config /var/tmp/minikube/kubeadm.yaml  --ignore-preflight-errors=DirAvailable--etc-kubernetes-manifests,DirAvailable--var-lib-minikube,DirAvailable--var-lib-minikube-etcd,FileAvailable--etc-kubernetes-manifests-kube-scheduler.yaml,FileAvailable--etc-kubernetes-manifests-kube-apiserver.yaml,FileAvailable--etc-kubernetes-manifests-kube-controller-manager.yaml,FileAvailable--etc-kubernetes-manifests-etcd.yaml,Port-10250,Swap,NumCPU,Mem,SystemVerification,FileContent--proc-sys-net-bridge-bridge-nf-call-iptables": Process exited with status 1
+stdout:
+[init] Using Kubernetes version: v1.26.1
+[preflight] Running pre-flight checks
+[preflight] The system verification failed. Printing the output from the verification:
+KERNEL_VERSION: 5.15.0-58-generic
+OS: Linux
+CGROUPS_CPU: enabled
+CGROUPS_CPUSET: enabled
+CGROUPS_DEVICES: enabled
+CGROUPS_FREEZER: enabled
+CGROUPS_MEMORY: enabled
+CGROUPS_PIDS: enabled
+CGROUPS_HUGETLB: enabled
+CGROUPS_IO: enabled
+[preflight] Pulling images required for setting up a Kubernetes cluster
+[preflight] This might take a minute or two, depending on the speed of your internet connection
+[preflight] You can also perform this action in beforehand using 'kubeadm config images pull'
+[certs] Using certificateDir folder "/var/lib/minikube/certs"
+[certs] Using existing ca certificate authority
+[certs] Using existing apiserver certificate and key on disk
+[certs] Using existing apiserver-kubelet-client certificate and key on disk
+[certs] Using existing front-proxy-ca certificate authority
+[certs] Using existing front-proxy-client certificate and key on disk
+[certs] Using existing etcd/ca certificate authority
+[certs] Using existing etcd/server certificate and key on disk
+[certs] Using existing etcd/peer certificate and key on disk
+[certs] Using existing etcd/healthcheck-client certificate and key on disk
+[certs] Using existing apiserver-etcd-client certificate and key on disk
+[certs] Using the existing "sa" key
+[kubeconfig] Using kubeconfig folder "/etc/kubernetes"
+[kubeconfig] Writing "admin.conf" kubeconfig file
+[kubeconfig] Writing "kubelet.conf" kubeconfig file
+[kubeconfig] Writing "controller-manager.conf" kubeconfig file
+[kubeconfig] Writing "scheduler.conf" kubeconfig file
+[kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+[kubelet-start] Starting the kubelet
+[control-plane] Using manifest folder "/etc/kubernetes/manifests"
+[control-plane] Creating static Pod manifest for "kube-apiserver"
+[control-plane] Creating static Pod manifest for "kube-controller-manager"
+[control-plane] Creating static Pod manifest for "kube-scheduler"
+[etcd] Creating static Pod manifest for local etcd in "/etc/kubernetes/manifests"
+[wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory "/etc/kubernetes/manifests". This can take up to 4m0s
+[kubelet-check] Initial timeout of 40s passed.
+
+Unfortunately, an error has occurred:
+	timed out waiting for the condition
+
+This error is likely caused by:
+	- The kubelet is not running
+	- The kubelet is unhealthy due to a misconfiguration of the node in some way (required cgroups disabled)
+
+If you are on a systemd-powered system, you can try to troubleshoot the error with the following commands:
+	- 'systemctl status kubelet'
+	- 'journalctl -xeu kubelet'
+
+Additionally, a control plane component may have crashed or exited when started by the container runtime.
+To troubleshoot, list all containers using your preferred container runtimes CLI.
+Here is one example how you may list all running Kubernetes containers by using crictl:
+	- 'crictl --runtime-endpoint unix:///var/run/cri-dockerd.sock ps -a | grep kube | grep -v pause'
+	Once you have found the failing container, you can inspect its logs with:
+	- 'crictl --runtime-endpoint unix:///var/run/cri-dockerd.sock logs CONTAINERID'
+
+stderr:
+W0128 05:31:55.975448   20954 initconfiguration.go:119] Usage of CRI endpoints without URL scheme is deprecated and can cause kubelet errors in the future. Automatically prepending scheme "unix" to the "criSocket" with value "/var/run/cri-dockerd.sock". Please update your configuration!
+	[WARNING Swap]: swap is enabled; production deployments should disable swap unless testing the NodeSwap feature gate of the kubelet
+	[WARNING SystemVerification]: failed to parse kernel config: unable to load kernel module: "configs", output: "modprobe: FATAL: Module configs not found in directory /lib/modules/5.15.0-58-generic\n", err: exit status 1
+	[WARNING Service-Kubelet]: kubelet service is not enabled, please run 'systemctl enable kubelet.service'
+error execution phase wait-control-plane: couldn't initialize a Kubernetes cluster
+To see the stack trace of this error execute with --v=5 or higher
+
+
+╭───────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                           │
+│    😿  If the above advice does not help, please let us know:                             │
+│    👉  https://github.com/kubernetes/minikube/issues/new/choose                           │
+│                                                                                           │
+│    Please run `minikube logs --file=logs.txt` and attach logs.txt to the GitHub issue.    │
+│                                                                                           │
+╰───────────────────────────────────────────────────────────────────────────────────────────╯
+
+❌  Exiting due to K8S_KUBELET_NOT_RUNNING: wait: /bin/bash -c "sudo env PATH="/var/lib/minikube/binaries/v1.26.1:$PATH" kubeadm init --config /var/tmp/minikube/kubeadm.yaml  --ignore-preflight-errors=DirAvailable--etc-kubernetes-manifests,DirAvailable--var-lib-minikube,DirAvailable--var-lib-minikube-etcd,FileAvailable--etc-kubernetes-manifests-kube-scheduler.yaml,FileAvailable--etc-kubernetes-manifests-kube-apiserver.yaml,FileAvailable--etc-kubernetes-manifests-kube-controller-manager.yaml,FileAvailable--etc-kubernetes-manifests-etcd.yaml,Port-10250,Swap,NumCPU,Mem,SystemVerification,FileContent--proc-sys-net-bridge-bridge-nf-call-iptables": Process exited with status 1
+stdout:
+[init] Using Kubernetes version: v1.26.1
+[preflight] Running pre-flight checks
+[preflight] The system verification failed. Printing the output from the verification:
+KERNEL_VERSION: 5.15.0-58-generic
+OS: Linux
+CGROUPS_CPU: enabled
+CGROUPS_CPUSET: enabled
+CGROUPS_DEVICES: enabled
+CGROUPS_FREEZER: enabled
+CGROUPS_MEMORY: enabled
+CGROUPS_PIDS: enabled
+CGROUPS_HUGETLB: enabled
+CGROUPS_IO: enabled
+[preflight] Pulling images required for setting up a Kubernetes cluster
+[preflight] This might take a minute or two, depending on the speed of your internet connection
+[preflight] You can also perform this action in beforehand using 'kubeadm config images pull'
+[certs] Using certificateDir folder "/var/lib/minikube/certs"
+[certs] Using existing ca certificate authority
+[certs] Using existing apiserver certificate and key on disk
+[certs] Using existing apiserver-kubelet-client certificate and key on disk
+[certs] Using existing front-proxy-ca certificate authority
+[certs] Using existing front-proxy-client certificate and key on disk
+[certs] Using existing etcd/ca certificate authority
+[certs] Using existing etcd/server certificate and key on disk
+[certs] Using existing etcd/peer certificate and key on disk
+[certs] Using existing etcd/healthcheck-client certificate and key on disk
+[certs] Using existing apiserver-etcd-client certificate and key on disk
+[certs] Using the existing "sa" key
+[kubeconfig] Using kubeconfig folder "/etc/kubernetes"
+[kubeconfig] Writing "admin.conf" kubeconfig file
+[kubeconfig] Writing "kubelet.conf" kubeconfig file
+[kubeconfig] Writing "controller-manager.conf" kubeconfig file
+[kubeconfig] Writing "scheduler.conf" kubeconfig file
+[kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+[kubelet-start] Starting the kubelet
+[control-plane] Using manifest folder "/etc/kubernetes/manifests"
+[control-plane] Creating static Pod manifest for "kube-apiserver"
+[control-plane] Creating static Pod manifest for "kube-controller-manager"
+[control-plane] Creating static Pod manifest for "kube-scheduler"
+[etcd] Creating static Pod manifest for local etcd in "/etc/kubernetes/manifests"
+[wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory "/etc/kubernetes/manifests". This can take up to 4m0s
+[kubelet-check] Initial timeout of 40s passed.
+
+Unfortunately, an error has occurred:
+	timed out waiting for the condition
+
+This error is likely caused by:
+	- The kubelet is not running
+	- The kubelet is unhealthy due to a misconfiguration of the node in some way (required cgroups disabled)
+
+If you are on a systemd-powered system, you can try to troubleshoot the error with the following commands:
+	- 'systemctl status kubelet'
+	- 'journalctl -xeu kubelet'
+
+Additionally, a control plane component may have crashed or exited when started by the container runtime.
+To troubleshoot, list all containers using your preferred container runtimes CLI.
+Here is one example how you may list all running Kubernetes containers by using crictl:
+	- 'crictl --runtime-endpoint unix:///var/run/cri-dockerd.sock ps -a | grep kube | grep -v pause'
+	Once you have found the failing container, you can inspect its logs with:
+	- 'crictl --runtime-endpoint unix:///var/run/cri-dockerd.sock logs CONTAINERID'
+
+stderr:
+W0128 05:31:55.975448   20954 initconfiguration.go:119] Usage of CRI endpoints without URL scheme is deprecated and can cause kubelet errors in the future. Automatically prepending scheme "unix" to the "criSocket" with value "/var/run/cri-dockerd.sock". Please update your configuration!
+	[WARNING Swap]: swap is enabled; production deployments should disable swap unless testing the NodeSwap feature gate of the kubelet
+	[WARNING SystemVerification]: failed to parse kernel config: unable to load kernel module: "configs", output: "modprobe: FATAL: Module configs not found in directory /lib/modules/5.15.0-58-generic\n", err: exit status 1
+	[WARNING Service-Kubelet]: kubelet service is not enabled, please run 'systemctl enable kubelet.service'
+error execution phase wait-control-plane: couldn't initialize a Kubernetes cluster
+To see the stack trace of this error execute with --v=5 or higher
+
+💡  Suggestion: Check output of 'journalctl -xeu kubelet', try passing --extra-config=kubelet.cgroup-driver=systemd to minikube start
+🍿  Related issue: https://github.com/kubernetes/minikube/issues/4172
+
+kamran@kamran-System-Product-Name:~$ kubectl get pods --all-namespaces
+Command 'kubectl' not found, but can be installed with:
+sudo snap install kubectl
+kamran@kamran-System-Product-Name:~$ curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo chmod +x kubectl
+sudo mv kubectl /usr/local/bin/
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   138  100   138    0     0    296      0 --:--:-- --:--:-- --:--:--   296
+100 45.7M  100 45.7M    0     0  15.8M      0  0:00:02  0:00:02 --:--:-- 21.2M
+kamran@kamran-System-Product-Name:~$ sudo chmod +x kubectl
+chmod: cannot access 'kubectl': No such file or directory
+kamran@kamran-System-Product-Name:~$ kubectl get pods --all-namespaces
+E0128 11:08:28.822706   30805 memcache.go:238] couldn't get current server API group list: Get "https://192.168.49.2:8443/api?timeout=32s": dial tcp 192.168.49.2:8443: connect: connection refused
+E0128 11:08:28.822849   30805 memcache.go:238] couldn't get current server API group list: Get "https://192.168.49.2:8443/api?timeout=32s": dial tcp 192.168.49.2:8443: connect: connection refused
+E0128 11:08:28.823926   30805 memcache.go:238] couldn't get current server API group list: Get "https://192.168.49.2:8443/api?timeout=32s": dial tcp 192.168.49.2:8443: connect: connection refused
+E0128 11:08:28.825201   30805 memcache.go:238] couldn't get current server API group list: Get "https://192.168.49.2:8443/api?timeout=32s": dial tcp 192.168.49.2:8443: connect: connection refused
+E0128 11:08:28.826404   30805 memcache.go:238] couldn't get current server API group list: Get "https://192.168.49.2:8443/api?timeout=32s": dial tcp 192.168.49.2:8443: connect: connection refused
+The connection to the server 192.168.49.2:8443 was refused - did you specify the right host or port?
+kamran@kamran-System-Product-Name:~$ kubectl get pods
+E0128 11:08:41.333423   30887 memcache.go:238] couldn't get current server API group list: Get "https://192.168.49.2:8443/api?timeout=32s": dial tcp 192.168.49.2:8443: connect: connection refused
+E0128 11:08:41.333592   30887 memcache.go:238] couldn't get current server API group list: Get "https://192.168.49.2:8443/api?timeout=32s": dial tcp 192.168.49.2:8443: connect: connection refused
+E0128 11:08:41.334810   30887 memcache.go:238] couldn't get current server API group list: Get "https://192.168.49.2:8443/api?timeout=32s": dial tcp 192.168.49.2:8443: connect: connection refused
+E0128 11:08:41.336012   30887 memcache.go:238] couldn't get current server API group list: Get "https://192.168.49.2:8443/api?timeout=32s": dial tcp 192.168.49.2:8443: connect: connection refused
+E0128 11:08:41.337216   30887 memcache.go:238] couldn't get current server API group list: Get "https://192.168.49.2:8443/api?timeout=32s": dial tcp 192.168.49.2:8443: connect: connection refused
+The connection to the server 192.168.49.2:8443 was refused - did you specify the right host or port?
+kamran@kamran-System-Product-Name:~$ 
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+kamran@kamran-System-Product-Name:~$ ls
+bashFolder  Documents  Jenkins        Music              Public     Videos
+DeployApps  Downloads  kamran_devops  PersonalDocuments  snap
+Desktop     gitFolder  Learning       Pictures           Templates
+kamran@kamran-System-Product-Name:~$ cd  gitFolder/
+kamran@kamran-System-Product-Name:~/gitFolder$ ls
+Docker_Compose                      GitCommands    react_django_app_commands
+DockerInstallationAndBasicCommands  kubernetes     ShellScripting
+Docker_Volume                       LinuxCommands
+kamran@kamran-System-Product-Name:~/gitFolder$ cd kubernetes/
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ ls
+kubernetesNotes  minikube-linux-amd64
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ rm -rf minikube-linux-amd64 
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ minikube delete
+🙄  "minikube" profile does not exist, trying anyways.
+💀  Removed all traces of the "minikube" cluster.
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ sudo get-apt update
+[sudo] password for kamran: 
+sudo: a password is required
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ sudo apt-get update
+[sudo] password for kamran: 
+Hit:1 https://download.docker.com/linux/ubuntu jammy InRelease
+Hit:2 http://in.archive.ubuntu.com/ubuntu jammy InRelease   
+Get:3 http://in.archive.ubuntu.com/ubuntu jammy-updates InRelease [114 kB]   
+Get:4 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB]              
+Get:5 http://in.archive.ubuntu.com/ubuntu jammy-backports InRelease [99.8 kB]
+Get:6 http://in.archive.ubuntu.com/ubuntu jammy-updates/main i386 Packages [418 kB]
+Get:7 http://security.ubuntu.com/ubuntu jammy-security/main amd64 DEP-11 Metadata [41.5 kB]
+Get:8 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 DEP-11 Metadata [13.3 kB]
+Get:9 http://in.archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [839 kB]
+Get:10 http://in.archive.ubuntu.com/ubuntu jammy-updates/main amd64 DEP-11 Metadata [101 kB]
+Get:11 http://in.archive.ubuntu.com/ubuntu jammy-updates/main amd64 c-n-f Metadata [12.3 kB]
+Get:12 http://in.archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [793 kB]
+Get:13 http://in.archive.ubuntu.com/ubuntu jammy-updates/universe i386 Packages [566 kB]
+Get:14 http://in.archive.ubuntu.com/ubuntu jammy-updates/universe amd64 DEP-11 Metadata [265 kB]
+Get:15 http://in.archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 DEP-11 Metadata [940 B]
+Get:16 http://in.archive.ubuntu.com/ubuntu jammy-backports/universe amd64 DEP-11 Metadata [12.5 kB]
+Fetched 3,387 kB in 3s (1,096 kB/s)                                  
+Reading package lists... Done
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ sudo apt-get install docker
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  bridge-utils libflashrom1 libftdi1-2 ubuntu-fan
+Use 'sudo apt autoremove' to remove them.
+The following additional packages will be installed:
+  wmdocker
+The following NEW packages will be installed:
+  docker wmdocker
+0 upgraded, 2 newly installed, 0 to remove and 12 not upgraded.
+Need to get 14.3 kB of archives.
+After this operation, 58.4 kB of additional disk space will be used.
+Do you want to continue? [Y/n] Y
+Get:1 http://in.archive.ubuntu.com/ubuntu jammy/universe amd64 wmdocker amd64 1.5-2 [13.0 kB]
+Get:2 http://in.archive.ubuntu.com/ubuntu jammy/universe amd64 docker all 1.5-2 [1,316 B]
+Fetched 14.3 kB in 1s (21.2 kB/s)  
+Selecting previously unselected package wmdocker.
+(Reading database ... 199656 files and directories currently installed.)
+Preparing to unpack .../wmdocker_1.5-2_amd64.deb ...
+Unpacking wmdocker (1.5-2) ...
+Selecting previously unselected package docker.
+Preparing to unpack .../archives/docker_1.5-2_all.deb ...
+Unpacking docker (1.5-2) ...
+Setting up wmdocker (1.5-2) ...
+Setting up docker (1.5-2) ...
+Processing triggers for man-db (2.10.2-1) ...
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 77.3M  100 77.3M    0     0  19.9M      0  0:00:03  0:00:03 --:--:-- 19.9M
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ minikube start
+😄  minikube v1.29.0 on Ubuntu 22.04
+✨  Automatically selected the docker driver. Other choices: ssh, none
+📌  Using Docker driver with root privileges
+👍  Starting control plane node minikube in cluster minikube
+🚜  Pulling base image ...
+🔥  Creating docker container (CPUs=2, Memory=2200MB) ...
+🐳  Preparing Kubernetes v1.26.1 on Docker 20.10.23 ...
+    ▪ Generating certificates and keys ...
+    ▪ Booting up control plane ...
+    ▪ Configuring RBAC rules ...
+🔗  Configuring bridge CNI (Container Networking Interface) ...
+    ▪ Using image gcr.io/k8s-minikube/storage-provisioner:v5
+🔎  Verifying Kubernetes components...
+🌟  Enabled addons: storage-provisioner, default-storageclass
+🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ docker ps 
+CONTAINER ID   IMAGE                                 COMMAND                  CREATED              STATUS              PORTS                                                                                                                                  NAMES
+5d7089eb877d   gcr.io/k8s-minikube/kicbase:v0.0.37   "/usr/local/bin/entr…"   About a minute ago   Up About a minute   127.0.0.1:49157->22/tcp, 127.0.0.1:49156->2376/tcp, 127.0.0.1:49155->5000/tcp, 127.0.0.1:49154->8443/tcp, 127.0.0.1:49153->32443/tcp   minikube
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ minikube ssh 
+docker@minikube:~$ ls
+docker@minikube:~$ docker ps 
+CONTAINER ID   IMAGE                       COMMAND                  CREATED              STATUS              PORTS     NAMES
+1e1ce1879e4d   6e38f40d628d                "/storage-provisioner"   About a minute ago   Up About a minute             k8s_storage-provisioner_storage-provisioner_kube-system_95123c19-8ceb-4723-8ac1-015391b79fa9_1
+ac5c2614d3d6   5185b96f0bec                "/coredns -conf /etc…"   About a minute ago   Up About a minute             k8s_coredns_coredns-787d4945fb-42t5w_kube-system_50375a5c-1aad-43c9-8c66-f22e085ad4a3_0
+cae129060b07   46a6bb3c77ce                "/usr/local/bin/kube…"   About a minute ago   Up About a minute             k8s_kube-proxy_kube-proxy-5czxd_kube-system_fbbb6d71-08cf-46e9-a584-b6365374adf2_0
+5b7aa11686c8   registry.k8s.io/pause:3.6   "/pause"                 About a minute ago   Up About a minute             k8s_POD_kube-proxy-5czxd_kube-system_fbbb6d71-08cf-46e9-a584-b6365374adf2_0
+2293e8595562   registry.k8s.io/pause:3.6   "/pause"                 About a minute ago   Up About a minute             k8s_POD_coredns-787d4945fb-42t5w_kube-system_50375a5c-1aad-43c9-8c66-f22e085ad4a3_0
+f12bf3376c14   registry.k8s.io/pause:3.6   "/pause"                 About a minute ago   Up About a minute             k8s_POD_storage-provisioner_kube-system_95123c19-8ceb-4723-8ac1-015391b79fa9_0
+a20cd76e19b1   deb04688c4a3                "kube-apiserver --ad…"   About a minute ago   Up About a minute             k8s_kube-apiserver_kube-apiserver-minikube_kube-system_5239bb256c1be9f71fd10c884d9299b1_0
+5e8758f0d4b3   registry.k8s.io/pause:3.6   "/pause"                 About a minute ago   Up About a minute             k8s_POD_kube-apiserver-minikube_kube-system_5239bb256c1be9f71fd10c884d9299b1_0
+aeafb8db934d   fce326961ae2                "etcd --advertise-cl…"   About a minute ago   Up About a minute             k8s_etcd_etcd-minikube_kube-system_a121e106627e5c6efa9ba48006cc43bf_0
+9367127fd5e6   655493523f60                "kube-scheduler --au…"   About a minute ago   Up About a minute             k8s_kube-scheduler_kube-scheduler-minikube_kube-system_197cd0de602d7cb722d0bd2daf878121_0
+43b8b829dc26   e9c08e11b07f                "kube-controller-man…"   About a minute ago   Up About a minute             k8s_kube-controller-manager_kube-controller-manager-minikube_kube-system_5175bba984ed52052d891b5a45b584b6_0
+29a83642a664   registry.k8s.io/pause:3.6   "/pause"                 About a minute ago   Up About a minute             k8s_POD_etcd-minikube_kube-system_a121e106627e5c6efa9ba48006cc43bf_0
+e67af940baa8   registry.k8s.io/pause:3.6   "/pause"                 About a minute ago   Up About a minute             k8s_POD_kube-controller-manager-minikube_kube-system_5175bba984ed52052d891b5a45b584b6_0
+3ebce7a4c63c   registry.k8s.io/pause:3.6   "/pause"                 About a minute ago   Up About a minute             k8s_POD_kube-scheduler-minikube_kube-system_197cd0de602d7cb722d0bd2daf878121_0
+docker@minikube:~$ exit
+logout
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ docker ps 
+CONTAINER ID   IMAGE                                 COMMAND                  CREATED         STATUS         PORTS                                                                                                                                  NAMES
+5d7089eb877d   gcr.io/k8s-minikube/kicbase:v0.0.37   "/usr/local/bin/entr…"   3 minutes ago   Up 3 minutes   127.0.0.1:49157->22/tcp, 127.0.0.1:49156->2376/tcp, 127.0.0.1:49155->5000/tcp, 127.0.0.1:49154->8443/tcp, 127.0.0.1:49153->32443/tcp   minikube
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl
+kubectl controls the Kubernetes cluster manager.
+
+ Find more information at: https://kubernetes.io/docs/reference/kubectl/
+
+Basic Commands (Beginner):
+  create          Create a resource from a file or from stdin
+  expose          Take a replication controller, service, deployment or pod and expose it as a new Kubernetes service
+  run             Run a particular image on the cluster
+  set             Set specific features on objects
+
+Basic Commands (Intermediate):
+  explain         Get documentation for a resource
+  get             Display one or many resources
+  edit            Edit a resource on the server
+  delete          Delete resources by file names, stdin, resources and names, or by resources and label selector
+
+Deploy Commands:
+  rollout         Manage the rollout of a resource
+  scale           Set a new size for a deployment, replica set, or replication controller
+  autoscale       Auto-scale a deployment, replica set, stateful set, or replication controller
+
+Cluster Management Commands:
+  certificate     Modify certificate resources.
+  cluster-info    Display cluster information
+  top             Display resource (CPU/memory) usage
+  cordon          Mark node as unschedulable
+  uncordon        Mark node as schedulable
+  drain           Drain node in preparation for maintenance
+  taint           Update the taints on one or more nodes
+
+Troubleshooting and Debugging Commands:
+  describe        Show details of a specific resource or group of resources
+  logs            Print the logs for a container in a pod
+  attach          Attach to a running container
+  exec            Execute a command in a container
+  port-forward    Forward one or more local ports to a pod
+  proxy           Run a proxy to the Kubernetes API server
+  cp              Copy files and directories to and from containers
+  auth            Inspect authorization
+  debug           Create debugging sessions for troubleshooting workloads and nodes
+  events          List events
+
+Advanced Commands:
+  diff            Diff the live version against a would-be applied version
+  apply           Apply a configuration to a resource by file name or stdin
+  patch           Update fields of a resource
+  replace         Replace a resource by file name or stdin
+  wait            Experimental: Wait for a specific condition on one or many resources
+  kustomize       Build a kustomization target from a directory or URL.
+
+Settings Commands:
+  label           Update the labels on a resource
+  annotate        Update the annotations on a resource
+  completion      Output shell completion code for the specified shell (bash, zsh, fish, or powershell)
+
+Other Commands:
+  alpha           Commands for features in alpha
+  api-resources   Print the supported API resources on the server
+  api-versions    Print the supported API versions on the server, in the form of "group/version"
+  config          Modify kubeconfig files
+  plugin          Provides utilities for interacting with plugins
+  version         Print the client and server version information
+
+Usage:
+  kubectl [flags] [options]
+
+Use "kubectl <command> --help" for more information about a given command.
+Use "kubectl options" for a list of global command-line options (applies to all commands).
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl get pods
+No resources found in default namespace.
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl get pods -A
+NAMESPACE     NAME                               READY   STATUS    RESTARTS      AGE
+kube-system   coredns-787d4945fb-42t5w           1/1     Running   0             16m
+kube-system   etcd-minikube                      1/1     Running   0             16m
+kube-system   kube-apiserver-minikube            1/1     Running   0             16m
+kube-system   kube-controller-manager-minikube   1/1     Running   0             16m
+kube-system   kube-proxy-5czxd                   1/1     Running   0             16m
+kube-system   kube-scheduler-minikube            1/1     Running   0             16m
+kube-system   storage-provisioner                1/1     Running   1 (15m ago)   16m
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ docker ps 
+CONTAINER ID   IMAGE                                 COMMAND                  CREATED          STATUS          PORTS                                                                                                                                  NAMES
+5d7089eb877d   gcr.io/k8s-minikube/kicbase:v0.0.37   "/usr/local/bin/entr…"   45 minutes ago   Up 45 minutes   127.0.0.1:49157->22/tcp, 127.0.0.1:49156->2376/tcp, 127.0.0.1:49155->5000/tcp, 127.0.0.1:49154->8443/tcp, 127.0.0.1:49153->32443/tcp   minikube
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ vim pods-1.yaml
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl apply -f pods-1.yaml
+pod/nginx created
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ docker images
+REPOSITORY                     TAG             IMAGE ID       CREATED         SIZE
+wearekick/dummy-node-project   latest          3e47e9eb63e4   43 hours ago    982MB
+gcr.io/k8s-minikube/kicbase    v0.0.37         01c0ce65fff7   2 days ago      1.15GB
+mysql                          5.6             dd3b2a5dcb48   13 months ago   303MB
+node                           12.2.0-alpine   f391dabf9dce   3 years ago     77.7MB
+node                           6               ab290b853066   3 years ago     884MB
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl run nginx --image=nginx:1.14.2 --port=80
+Error from server (AlreadyExists): pods "nginx" already exists
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ docker ps 
+CONTAINER ID   IMAGE                                 COMMAND                  CREATED          STATUS          PORTS                                                                                                                                  NAMES
+5d7089eb877d   gcr.io/k8s-minikube/kicbase:v0.0.37   "/usr/local/bin/entr…"   48 minutes ago   Up 48 minutes   127.0.0.1:49157->22/tcp, 127.0.0.1:49156->2376/tcp, 127.0.0.1:49155->5000/tcp, 127.0.0.1:49154->8443/tcp, 127.0.0.1:49153->32443/tcp   minikube
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ docker ps -a
+CONTAINER ID   IMAGE                                 COMMAND                  CREATED          STATUS                      PORTS                                                                                                                                  NAMES
+5d7089eb877d   gcr.io/k8s-minikube/kicbase:v0.0.37   "/usr/local/bin/entr…"   48 minutes ago   Up 48 minutes               127.0.0.1:49157->22/tcp, 127.0.0.1:49156->2376/tcp, 127.0.0.1:49155->5000/tcp, 127.0.0.1:49154->8443/tcp, 127.0.0.1:49153->32443/tcp   minikube
+471ad878b3b1   wearekick/dummy-node-project          "npm run start:dev"      43 hours ago     Exited (255) 40 hours ago   0.0.0.0:8080->80/tcp, :::8080->80/tcp                                                                                                  dummy-node-project
+6951d8be4f4d   mysql:5.6                             "docker-entrypoint.s…"   43 hours ago     Exited (255) 40 hours ago   3306/tcp                                                                                                                               dummy-node-project_db_1
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ docker rm 471ad878b3b1 6951d8be4f4d
+471ad878b3b1
+6951d8be4f4d
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ docker images
+REPOSITORY                     TAG             IMAGE ID       CREATED         SIZE
+wearekick/dummy-node-project   latest          3e47e9eb63e4   43 hours ago    982MB
+gcr.io/k8s-minikube/kicbase    v0.0.37         01c0ce65fff7   2 days ago      1.15GB
+mysql                          5.6             dd3b2a5dcb48   13 months ago   303MB
+node                           12.2.0-alpine   f391dabf9dce   3 years ago     77.7MB
+node                           6               ab290b853066   3 years ago     884MB
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl run nginx --image=nginx:1.14.2 --port=80
+Error from server (AlreadyExists): pods "nginx" already exists
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ vim pods-1.yaml
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl apply -f pods-1.yaml
+pod/nginx-ctr created
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl run nginx-ctr --image=nginx:1.14.2 --port=80
+Error from server (AlreadyExists): pods "nginx-ctr" already exists
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl get pods
+NAME        READY   STATUS    RESTARTS   AGE
+nginx       1/1     Running   0          7m31s
+nginx-ctr   1/1     Running   0          114s
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl delete pod nginx 
+pod "nginx" deleted
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl get pods
+NAME        READY   STATUS    RESTARTS   AGE
+nginx-ctr   1/1     Running   0          2m58s
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl delete pod nginx-ctr
+pod "nginx-ctr" deleted
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl get namespaces
+NAME              STATUS   AGE
+default           Active   56m
+kube-node-lease   Active   56m
+kube-public       Active   56m
+kube-system       Active   56m
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ ls
+kubernetesNotes  minikube-linux-amd64  pods-1.yaml
+
