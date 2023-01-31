@@ -1,0 +1,97 @@
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl get namespaces
+NAME              STATUS   AGE
+default           Active   2d
+kube-node-lease   Active   2d
+kube-public       Active   2d
+kube-system       Active   2d
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl get po
+No resources found in default namespace.
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl get po --namespaces=kube-system
+error: unknown flag: --namespaces
+See 'kubectl get --help' for usage.
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl get po --namespace=kube-system
+NAME                               READY   STATUS    RESTARTS        AGE
+coredns-787d4945fb-42t5w           1/1     Running   2 (3m37s ago)   2d1h
+etcd-minikube                      1/1     Running   2 (3m37s ago)   2d1h
+kube-apiserver-minikube            1/1     Running   2 (3m37s ago)   2d1h
+kube-controller-manager-minikube   1/1     Running   2 (3m37s ago)   2d1h
+kube-proxy-5czxd                   1/1     Running   2 (3m37s ago)   2d1h
+kube-scheduler-minikube            1/1     Running   2 (3m37s ago)   2d1h
+storage-provisioner                1/1     Running   5 (2m42s ago)   2d1h
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl create namespace django-todo-appln
+namespace/django-todo-appln created
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl get namespaces
+NAME                STATUS   AGE
+default             Active   2d1h
+django-todo-appln   Active   15s
+kube-node-lease     Active   2d1h
+kube-public         Active   2d1h
+kube-system         Active   2d1h
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ ls
+kubernetesNotes  minikube-linux-amd64  pods-1.yaml
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ createNamespace.yaml
+createNamespace.yaml: command not found
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ vim createNamespace.yaml
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl apply -f createNamespace.yaml 
+error: resource mapping not found for name: "nodejs-todo-appln" namespace: "" from "createNamespace.yaml": no matches for kind "Namespace" in version "V1"
+ensure CRDs are installed first
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ vim createNamespace.yaml 
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl apply -f createNamespace.yaml 
+namespace/nodejs-todo-appln created
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl get namespaces
+NAME                STATUS   AGE
+default             Active   2d1h
+django-todo-appln   Active   6m7s
+kube-node-lease     Active   2d1h
+kube-public         Active   2d1h
+kube-system         Active   2d1h
+nodejs-todo-appln   Active   10s
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ ls 
+createNamespace.yaml  kubernetesNotes  minikube-linux-amd64  pods-1.yaml
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ vim pods-1.yaml 
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl apply -f pods-1.yaml 
+pod/nginx-ctr created
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ docker ps 
+CONTAINER ID   IMAGE                                 COMMAND                  CREATED      STATUS          PORTS                                                                                                                                  NAMES
+5d7089eb877d   gcr.io/k8s-minikube/kicbase:v0.0.37   "/usr/local/bin/entr…"   2 days ago   Up 21 minutes   127.0.0.1:49157->22/tcp, 127.0.0.1:49156->2376/tcp, 127.0.0.1:49155->5000/tcp, 127.0.0.1:49154->8443/tcp, 127.0.0.1:49153->32443/tcp   minikube
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl get pods
+NAME        READY   STATUS    RESTARTS   AGE
+nginx-ctr   1/1     Running   0          81s
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl get pods --namespace=default
+NAME        READY   STATUS    RESTARTS   AGE
+nginx-ctr   1/1     Running   0          101s
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ cp pods-1.yaml pods-2.yaml
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ ls
+createNamespace.yaml  kubernetesNotes  minikube-linux-amd64  pods-1.yaml  pods-2.yaml
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ vim pods- 
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ vim pods-2.yaml 
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ vim pods-2.yaml 
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl apply -f pods-2.yaml 
+pod/nginx-ctr created
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl get pods --namespace=django-todo-appln
+NAME        READY   STATUS    RESTARTS   AGE
+nginx-ctr   1/1     Running   0          25
