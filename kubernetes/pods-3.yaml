@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: Pod
-metadata:
-  name: kamran-ctr
-  namespace: kamran
-spec:
-  containers:
-  - name: kamranimage
-    image: kamzaidi/pythonnewimage

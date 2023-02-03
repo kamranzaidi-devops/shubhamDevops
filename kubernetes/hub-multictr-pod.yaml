@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hub-multi-container-pod
+  namespace: kamran
+spec:
+  containers:
+  - name: django-ctr
+    image: kamzaidi/django-todo-app
+    ports:
+    - containerPort: 8001
+  - name: node-ctr
+    image: kamzaidi/nodejs-todo-app
+    ports:
+    - containerPort: 8000
+
+

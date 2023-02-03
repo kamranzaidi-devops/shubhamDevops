@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-django-container-pod
+  namespace: kamran
+spec:
+  containers:
+  - name: django-ctr
+    image: kamzaidi/django-todo-app
+    ports:
+    - containerPort: 8001
+
