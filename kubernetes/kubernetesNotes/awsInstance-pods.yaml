@@ -1,0 +1,343 @@
+kamran@kamran-System-Product-Name:~$ ls
+bashFolder  DeployApps  Desktop  Documents  Downloads  gitFolder  Jenkins  kamran_devops  Learning  Music  PersonalDocuments  Pictures  Public  snap  Templates  Videos
+kamran@kamran-System-Product-Name:~$ cd Downloads/
+kamran@kamran-System-Product-Name:~/Downloads$ LS
+LS: command not found
+kamran@kamran-System-Product-Name:~/Downloads$ ls
+'2 Create_and_Clone_a_GitHub_Repository.docx'   indexs.html   kamranDevops.pem   profile.png   slack-desktop-4.29.149-amd64.deb   style.css   zoom_amd64.deb
+kamran@kamran-System-Product-Name:~/Downloads$ sudo ssh -i "kamranDevops.pem" ubuntu@ec2-13-234-77-71.ap-south-1.compute.amazonaws.com
+[sudo] password for kamran: 
+The authenticity of host 'ec2-13-234-77-71.ap-south-1.compute.amazonaws.com (13.234.77.71)' can't be established.
+ED25519 key fingerprint is SHA256:qyBkWP6HcyCxHvAIO8EvOTmPzg8UPD4FvPUZ2lWBoXc.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? Y
+Please type 'yes', 'no' or the fingerprint: yes
+Warning: Permanently added 'ec2-13-234-77-71.ap-south-1.compute.amazonaws.com' (ED25519) to the list of known hosts.
+Welcome to Ubuntu 22.04.1 LTS (GNU/Linux 5.15.0-1028-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Fri Feb  3 05:17:32 UTC 2023
+
+  System load:  0.10791015625     Processes:             112
+  Usage of /:   19.7% of 7.57GB   Users logged in:       0
+  Memory usage: 6%                IPv4 address for eth0: 172.31.32.233
+  Swap usage:   0%
+
+0 updates can be applied immediately.
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@ip-172-31-32-233:~$ sudo apt-get update
+Hit:1 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy InRelease
+Get:2 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates InRelease [114 kB]
+Get:3 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB]
+Get:4 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-backports InRelease [107 kB]
+Get:5 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/universe amd64 Packages [14.1 MB]
+Get:6 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [601 kB]
+Get:7 http://security.ubuntu.com/ubuntu jammy-security/main Translation-en [127 kB]
+Get:8 http://security.ubuntu.com/ubuntu jammy-security/main amd64 c-n-f Metadata [8064 B]
+Get:9 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 Packages [528 kB]             
+Get:10 http://security.ubuntu.com/ubuntu jammy-security/restricted Translation-en [81.2 kB]     
+Get:11 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 c-n-f Metadata [556 B]   
+Get:12 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [637 kB]    
+Get:13 http://security.ubuntu.com/ubuntu jammy-security/universe Translation-en [87.5 kB]         
+Get:14 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 c-n-f Metadata [11.3 kB]           
+Get:15 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages [4268 B]     
+Get:16 http://security.ubuntu.com/ubuntu jammy-security/multiverse Translation-en [972 B]
+Get:17 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 c-n-f Metadata [228 B]
+Get:18 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/universe Translation-en [5652 kB]
+Get:19 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/universe amd64 c-n-f Metadata [286 kB]
+Get:20 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/multiverse amd64 Packages [217 kB]
+Get:21 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/multiverse Translation-en [112 kB]
+Get:22 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/multiverse amd64 c-n-f Metadata [8372 B]
+Get:23 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [852 kB]
+Get:24 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/main Translation-en [189 kB]
+Get:25 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/main amd64 c-n-f Metadata [13.2 kB]
+Get:26 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [566 kB]
+Get:27 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/restricted Translation-en [87.1 kB]
+Get:28 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 c-n-f Metadata [556 B]
+Get:29 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [797 kB]
+Get:30 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/universe Translation-en [142 kB]
+Get:31 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/universe amd64 c-n-f Metadata [15.1 kB]
+Get:32 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages [7988 B]
+Get:33 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/multiverse Translation-en [2448 B]
+Get:34 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 c-n-f Metadata [432 B]
+Get:35 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-backports/main amd64 Packages [40.7 kB]
+Get:36 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-backports/main Translation-en [9800 B]
+Get:37 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-backports/main amd64 c-n-f Metadata [392 B]
+Get:38 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-backports/restricted amd64 c-n-f Metadata [116 B]
+Get:39 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-backports/universe amd64 Packages [19.5 kB]
+Get:40 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-backports/universe Translation-en [13.8 kB]
+Get:41 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-backports/universe amd64 c-n-f Metadata [392 B]
+Get:42 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-backports/multiverse amd64 c-n-f Metadata [116 B]
+Fetched 25.5 MB in 6s (4442 kB/s)                          
+Reading package lists... Done
+ubuntu@ip-172-31-32-233:~$ sudo apt-get install docker.io
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  bridge-utils containerd dns-root-data dnsmasq-base pigz runc ubuntu-fan
+Suggested packages:
+  ifupdown aufs-tools cgroupfs-mount | cgroup-lite debootstrap docker-doc rinse zfs-fuse | zfsutils
+The following NEW packages will be installed:
+  bridge-utils containerd dns-root-data dnsmasq-base docker.io pigz runc ubuntu-fan
+0 upgraded, 8 newly installed, 0 to remove and 29 not upgraded.
+Need to get 66.8 MB of archives.
+After this operation, 287 MB of additional disk space will be used.
+Do you want to continue? [Y/n] Y
+Get:1 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/universe amd64 pigz amd64 2.6-1 [63.6 kB]
+Get:2 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/main amd64 bridge-utils amd64 1.7-1ubuntu3 [34.4 kB]
+Get:3 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/main amd64 runc amd64 1.1.0-0ubuntu1.1 [4242 kB]
+Get:4 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/main amd64 containerd amd64 1.5.9-0ubuntu3.1 [28.1 MB]
+Get:5 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/main amd64 dns-root-data all 2021011101 [5256 B]                                                                                              
+Get:6 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy-updates/main amd64 dnsmasq-base amd64 2.86-1.1ubuntu0.1 [354 kB]                                                                              
+Get:7 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/universe amd64 docker.io amd64 20.10.12-0ubuntu4 [34.0 MB]                                                                                    
+Get:8 http://ap-south-1.ec2.archive.ubuntu.com/ubuntu jammy/universe amd64 ubuntu-fan all 0.12.16 [35.2 kB]                                                                                               
+Fetched 66.8 MB in 14s (4677 kB/s)                                                                                                                                                                        
+Preconfiguring packages ...
+Selecting previously unselected package pigz.
+(Reading database ... 63567 files and directories currently installed.)
+Preparing to unpack .../0-pigz_2.6-1_amd64.deb ...
+Unpacking pigz (2.6-1) ...
+Selecting previously unselected package bridge-utils.
+Preparing to unpack .../1-bridge-utils_1.7-1ubuntu3_amd64.deb ...
+Unpacking bridge-utils (1.7-1ubuntu3) ...
+Selecting previously unselected package runc.
+Preparing to unpack .../2-runc_1.1.0-0ubuntu1.1_amd64.deb ...
+Unpacking runc (1.1.0-0ubuntu1.1) ...
+Selecting previously unselected package containerd.
+Preparing to unpack .../3-containerd_1.5.9-0ubuntu3.1_amd64.deb ...
+Unpacking containerd (1.5.9-0ubuntu3.1) ...
+Selecting previously unselected package dns-root-data.
+Preparing to unpack .../4-dns-root-data_2021011101_all.deb ...
+Unpacking dns-root-data (2021011101) ...
+Selecting previously unselected package dnsmasq-base.
+Preparing to unpack .../5-dnsmasq-base_2.86-1.1ubuntu0.1_amd64.deb ...
+Unpacking dnsmasq-base (2.86-1.1ubuntu0.1) ...
+Selecting previously unselected package docker.io.
+Preparing to unpack .../6-docker.io_20.10.12-0ubuntu4_amd64.deb ...
+Unpacking docker.io (20.10.12-0ubuntu4) ...
+Selecting previously unselected package ubuntu-fan.
+Preparing to unpack .../7-ubuntu-fan_0.12.16_all.deb ...
+Unpacking ubuntu-fan (0.12.16) ...
+Setting up dnsmasq-base (2.86-1.1ubuntu0.1) ...
+Setting up runc (1.1.0-0ubuntu1.1) ...
+Setting up dns-root-data (2021011101) ...
+Setting up bridge-utils (1.7-1ubuntu3) ...
+Setting up pigz (2.6-1) ...
+Setting up containerd (1.5.9-0ubuntu3.1) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/containerd.service → /lib/systemd/system/containerd.service.
+Setting up ubuntu-fan (0.12.16) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/ubuntu-fan.service → /lib/systemd/system/ubuntu-fan.service.
+Setting up docker.io (20.10.12-0ubuntu4) ...
+Adding group `docker' (GID 122) ...
+Done.
+Created symlink /etc/systemd/system/multi-user.target.wants/docker.service → /lib/systemd/system/docker.service.
+Created symlink /etc/systemd/system/sockets.target.wants/docker.socket → /lib/systemd/system/docker.socket.
+Processing triggers for dbus (1.12.20-2ubuntu4.1) ...
+Processing triggers for man-db (2.10.2-1) ...
+Scanning processes...                                                                                                                                                                                      
+Scanning linux images...                                                                                                                                                                                   
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+ubuntu@ip-172-31-32-233:~$ $ sudo usermod -aG docker $USER.
+$: command not found
+ubuntu@ip-172-31-32-233:~$ sudo usermod -aG docker $USER.
+usermod: user 'ubuntu.' does not exist
+ubuntu@ip-172-31-32-233:~$ sudo usermod -aG docker $USER && newgrp docker
+ubuntu@ip-172-31-32-233:~$ curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 77.3M  100 77.3M    0     0  67.2M      0  0:00:01  0:00:01 --:--:-- 67.3M
+ubuntu@ip-172-31-32-233:~$ minikube start
+😄  minikube v1.29.0 on Ubuntu 22.04 (xen/amd64)
+✨  Automatically selected the docker driver. Other choices: ssh, none
+📌  Using Docker driver with root privileges
+👍  Starting control plane node minikube in cluster minikube
+🚜  Pulling base image ...
+💾  Downloading Kubernetes v1.26.1 preload ...
+    > preloaded-images-k8s-v18-v1...:  397.05 MiB / 397.05 MiB  100.00% 94.31 M
+    > gcr.io/k8s-minikube/kicbase...:  407.19 MiB / 407.19 MiB  100.00% 11.97 M
+🔥  Creating docker container (CPUs=2, Memory=2200MB) ...
+🐳  Preparing Kubernetes v1.26.1 on Docker 20.10.23 ...
+    ▪ Generating certificates and keys ...
+    ▪ Booting up control plane ...
+    ▪ Configuring RBAC rules ...
+🔗  Configuring bridge CNI (Container Networking Interface) ...
+    ▪ Using image gcr.io/k8s-minikube/storage-provisioner:v5
+🔎  Verifying Kubernetes components...
+🌟  Enabled addons: storage-provisioner, default-storageclass
+💡  kubectl not found. If you need it, try: 'minikube kubectl -- get pods -A'
+🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
+ubuntu@ip-172-31-32-233:~$ kubctl 
+Command 'kubctl' not found, did you mean:
+  command 'kubectl' from snap kubectl (1.26.1)
+See 'snap info <snapname>' for additional versions.
+ubuntu@ip-172-31-32-233:~$ sudo snap install kubectl
+error: This revision of snap "kubectl" was published using classic confinement and thus may perform
+       arbitrary system changes outside of the security sandbox that snaps are usually confined to,
+       which may put your system at risk.
+
+       If you understand and want to proceed repeat the command including --classic.
+ubuntu@ip-172-31-32-233:~$ sudo snap install kubectl --classic
+kubectl 1.26.1 from Canonical✓ installed
+ubuntu@ip-172-31-32-233:~$ kubectl get pods 
+No resources found in default namespace.
+ubuntu@ip-172-31-32-233:~$ kubectl get -n
+error: flag needs an argument: 'n' in -n
+See 'kubectl get --help' for usage.
+ubuntu@ip-172-31-32-233:~$ kubectl get --namespaces
+error: unknown flag: --namespaces
+See 'kubectl get --help' for usage.
+ubuntu@ip-172-31-32-233:~$ kubectl get --namespaces=default
+error: unknown flag: --namespaces
+See 'kubectl get --help' for usage.
+ubuntu@ip-172-31-32-233:~$ kubectl get pods--namespaces=default
+error: the server doesn't have a resource type "pods--namespaces=default"
+ubuntu@ip-172-31-32-233:~$ kubectl get pods --namespaces=default
+error: unknown flag: --namespaces
+See 'kubectl get --help' for usage.
+ubuntu@ip-172-31-32-233:~$ kubectl get pods --namespace=default
+No resources found in default namespace.
+ubuntu@ip-172-31-32-233:~$ kubectl get namespaces
+NAME              STATUS   AGE
+default           Active   3m56s
+kube-node-lease   Active   3m58s
+kube-public       Active   3m58s
+kube-system       Active   3m58s
+ubuntu@ip-172-31-32-233:~$ kubctl get pods --namespace=kube-system
+Command 'kubctl' not found, did you mean:
+  command 'kubectl' from snap kubectl (1.26.1)
+See 'snap info <snapname>' for additional versions.
+ubuntu@ip-172-31-32-233:~$ kubectl get pods --namespace=kube-system
+NAME                               READY   STATUS    RESTARTS        AGE
+coredns-787d4945fb-8g9g8           1/1     Running   0               4m9s
+etcd-minikube                      1/1     Running   0               4m15s
+kube-apiserver-minikube            1/1     Running   0               4m14s
+kube-controller-manager-minikube   1/1     Running   0               4m15s
+kube-proxy-s5zm9                   1/1     Running   0               4m9s
+kube-scheduler-minikube            1/1     Running   0               4m15s
+storage-provisioner                1/1     Running   1 (3m38s ago)   4m19s
+ubuntu@ip-172-31-32-233:~$ kubectl create namespace kamran
+namespace/kamran created
+ubuntu@ip-172-31-32-233:~$ kubectl get namespaces
+NAME              STATUS   AGE
+default           Active   5m58s
+kamran            Active   5s
+kube-node-lease   Active   6m
+kube-public       Active   6m
+kube-system       Active   6m
+ubuntu@ip-172-31-32-233:~$ ls
+minikube-linux-amd64  snap
+ubuntu@ip-172-31-32-233:~$ mkdir kubernetes
+ubuntu@ip-172-31-32-233:~$ cd kubernetes/
+ubuntu@ip-172-31-32-233:~/kubernetes$ vim pod-1.yaml
+ubuntu@ip-172-31-32-233:~/kubernetes$ kubectl apply -f pod-1.yaml
+Error from server (BadRequest): error when creating "pod-1.yaml": Pod in version "v1" cannot be handled as a Pod: strict decoding error: unknown field "metadata.namespaces"
+ubuntu@ip-172-31-32-233:~/kubernetes$ vim pod-1.yaml
+ubuntu@ip-172-31-32-233:~/kubernetes$ kubectl apply -f pod-1.yaml
+pod/pods-1 created
+ubuntu@ip-172-31-32-233:~/kubernetes$ kubectl get pods -n kamran
+NAME     READY   STATUS    RESTARTS   AGE
+pods-1   1/1     Running   0          16s
+ubuntu@ip-172-31-32-233:~/kubernetes$ minikube ssh
+docker@minikube:~$ docker ps 
+CONTAINER ID   IMAGE                       COMMAND                  CREATED          STATUS          PORTS     NAMES
+f8ef90cbed2c   nginx                       "/docker-entrypoint.…"   22 seconds ago   Up 20 seconds             k8s_nginx-ctr_pods-1_kamran_66bcd9d4-42e7-40c6-b9af-6dc6e7376e80_0
+77234aa82738   registry.k8s.io/pause:3.6   "/pause"                 30 seconds ago   Up 29 seconds             k8s_POD_pods-1_kamran_66bcd9d4-42e7-40c6-b9af-6dc6e7376e80_0
+9c4869fa8a32   6e38f40d628d                "/storage-provisioner"   7 minutes ago    Up 7 minutes              k8s_storage-provisioner_storage-provisioner_kube-system_cef6c28f-bdd3-41b0-afd2-bedccc20f5cf_1
+1f92378acc6f   46a6bb3c77ce                "/usr/local/bin/kube…"   8 minutes ago    Up 8 minutes              k8s_kube-proxy_kube-proxy-s5zm9_kube-system_55705e78-c5f9-4c68-a7ab-cd31d213c469_0
+8d796173f89e   5185b96f0bec                "/coredns -conf /etc…"   8 minutes ago    Up 8 minutes              k8s_coredns_coredns-787d4945fb-8g9g8_kube-system_4d7ef55a-0f83-4b09-9d52-adc7d2065180_0
+e6ef8e878ae0   registry.k8s.io/pause:3.6   "/pause"                 8 minutes ago    Up 8 minutes              k8s_POD_kube-proxy-s5zm9_kube-system_55705e78-c5f9-4c68-a7ab-cd31d213c469_0
+a274c747f3f7   registry.k8s.io/pause:3.6   "/pause"                 8 minutes ago    Up 8 minutes              k8s_POD_coredns-787d4945fb-8g9g8_kube-system_4d7ef55a-0f83-4b09-9d52-adc7d2065180_0
+2616a6aa2bd8   registry.k8s.io/pause:3.6   "/pause"                 8 minutes ago    Up 8 minutes              k8s_POD_storage-provisioner_kube-system_cef6c28f-bdd3-41b0-afd2-bedccc20f5cf_0
+a518084367f9   deb04688c4a3                "kube-apiserver --ad…"   8 minutes ago    Up 8 minutes              k8s_kube-apiserver_kube-apiserver-minikube_kube-system_5239bb256c1be9f71fd10c884d9299b1_0
+724fd0dd3efe   registry.k8s.io/pause:3.6   "/pause"                 8 minutes ago    Up 8 minutes              k8s_POD_kube-apiserver-minikube_kube-system_5239bb256c1be9f71fd10c884d9299b1_0
+d4ea09da8104   655493523f60                "kube-scheduler --au…"   8 minutes ago    Up 8 minutes              k8s_kube-scheduler_kube-scheduler-minikube_kube-system_197cd0de602d7cb722d0bd2daf878121_0
+5b286cb63e5f   e9c08e11b07f                "kube-controller-man…"   8 minutes ago    Up 8 minutes              k8s_kube-controller-manager_kube-controller-manager-minikube_kube-system_5175bba984ed52052d891b5a45b584b6_0
+15b77fcf9364   fce326961ae2                "etcd --advertise-cl…"   8 minutes ago    Up 8 minutes              k8s_etcd_etcd-minikube_kube-system_a121e106627e5c6efa9ba48006cc43bf_0
+4d403e15ff80   registry.k8s.io/pause:3.6   "/pause"                 8 minutes ago    Up 8 minutes              k8s_POD_kube-controller-manager-minikube_kube-system_5175bba984ed52052d891b5a45b584b6_0
+860ddbbf06a7   registry.k8s.io/pause:3.6   "/pause"                 8 minutes ago    Up 8 minutes              k8s_POD_kube-scheduler-minikube_kube-system_197cd0de602d7cb722d0bd2daf878121_0
+2adab5fa2492   registry.k8s.io/pause:3.6   "/pause"                 8 minutes ago    Up 8 minutes              k8s_POD_etcd-minikube_kube-system_a121e106627e5c6efa9ba48006cc43bf_0
+docker@minikube:~$ exit
+logout
+ubuntu@ip-172-31-32-233:~/kubernetes$ kubectl delete pod -f pod-1.yaml
+error: when paths, URLs, or stdin is provided as input, you may not specify resource arguments as well
+ubuntu@ip-172-31-32-233:~/kubernetes$ kubectl delete -f pod-1.yaml
+pod "pods-1" deleted
+ubuntu@ip-172-31-32-233:~/kubernetes$ vim pod-2.yaml
+ubuntu@ip-172-31-32-233:~/kubernetes$ kubectl apply -f pod-2.yaml
+pod/redis-pod created
+ubuntu@ip-172-31-32-233:~/kubernetes$ kubectl get pods -n kamran
+NAME        READY   STATUS              RESTARTS   AGE
+redis-pod   0/1     ContainerCreating   0          5s
+ubuntu@ip-172-31-32-233:~/kubernetes$ kubectl get pods -n kamran
+NAME        READY   STATUS    RESTARTS   AGE
+redis-pod   1/1     Running   0          17s
+ubuntu@ip-172-31-32-233:~/kubernetes$ kubectl get pods -n kamran
+NAME        READY   STATUS    RESTARTS   AGE
+redis-pod   1/1     Running   0          20s
+ubuntu@ip-172-31-32-233:~/kubernetes$ kubectl delete -f pod-2.yaml
+pod "redis-pod" deleted
+ubuntu@ip-172-31-32-233:~/kubernetes$ vim multi-contaner-pod.yaml
+ubuntu@ip-172-31-32-233:~/kubernetes$ kubectl apply -f multi-contaner-pod.yaml 
+pod/my-multi-container-pod created
+ubuntu@ip-172-31-32-233:~/kubernetes$ kubectl get pods -n kamran
+NAME                     READY   STATUS              RESTARTS   AGE
+my-multi-container-pod   0/2     ContainerCreating   0          5s
+ubuntu@ip-172-31-32-233:~/kubernetes$ kubectl get pods -n kamran
+NAME                     READY   STATUS    RESTARTS   AGE
+my-multi-container-pod   2/2     Running   0          7s
+ubuntu@ip-172-31-32-233:~/kubernetes$ kubectl get pods -n kamran
+NAME                     READY   STATUS    RESTARTS   AGE
+my-multi-container-pod   2/2     Running   0          9s
+ubuntu@ip-172-31-32-233:~/kubernetes$ minikube ssh
+Last login: Fri Feb  3 05:31:33 2023 from 192.168.49.1
+docker@minikube:~$ docker ps 
+CONTAINER ID   IMAGE                       COMMAND                  CREATED          STATUS          PORTS     NAMES
+41066c227210   redis                       "docker-entrypoint.s…"   22 seconds ago   Up 21 seconds             k8s_ctr-2_my-multi-container-pod_kamran_451b2141-d980-4a5a-9cc3-c5ada1c32990_0
+251190f24092   nginx                       "/docker-entrypoint.…"   23 seconds ago   Up 23 seconds             k8s_ctr-1_my-multi-container-pod_kamran_451b2141-d980-4a5a-9cc3-c5ada1c32990_0
+94a37de2f994   registry.k8s.io/pause:3.6   "/pause"                 26 seconds ago   Up 25 seconds             k8s_POD_my-multi-container-pod_kamran_451b2141-d980-4a5a-9cc3-c5ada1c32990_0
+9c4869fa8a32   6e38f40d628d                "/storage-provisioner"   12 minutes ago   Up 12 minutes             k8s_storage-provisioner_storage-provisioner_kube-system_cef6c28f-bdd3-41b0-afd2-bedccc20f5cf_1
+1f92378acc6f   46a6bb3c77ce                "/usr/local/bin/kube…"   13 minutes ago   Up 13 minutes             k8s_kube-proxy_kube-proxy-s5zm9_kube-system_55705e78-c5f9-4c68-a7ab-cd31d213c469_0
+8d796173f89e   5185b96f0bec                "/coredns -conf /etc…"   13 minutes ago   Up 13 minutes             k8s_coredns_coredns-787d4945fb-8g9g8_kube-system_4d7ef55a-0f83-4b09-9d52-adc7d2065180_0
+e6ef8e878ae0   registry.k8s.io/pause:3.6   "/pause"                 13 minutes ago   Up 13 minutes             k8s_POD_kube-proxy-s5zm9_kube-system_55705e78-c5f9-4c68-a7ab-cd31d213c469_0
+a274c747f3f7   registry.k8s.io/pause:3.6   "/pause"                 13 minutes ago   Up 13 minutes             k8s_POD_coredns-787d4945fb-8g9g8_kube-system_4d7ef55a-0f83-4b09-9d52-adc7d2065180_0
+2616a6aa2bd8   registry.k8s.io/pause:3.6   "/pause"                 13 minutes ago   Up 13 minutes             k8s_POD_storage-provisioner_kube-system_cef6c28f-bdd3-41b0-afd2-bedccc20f5cf_0
+a518084367f9   deb04688c4a3                "kube-apiserver --ad…"   13 minutes ago   Up 13 minutes             k8s_kube-apiserver_kube-apiserver-minikube_kube-system_5239bb256c1be9f71fd10c884d9299b1_0
+724fd0dd3efe   registry.k8s.io/pause:3.6   "/pause"                 13 minutes ago   Up 13 minutes             k8s_POD_kube-apiserver-minikube_kube-system_5239bb256c1be9f71fd10c884d9299b1_0
+d4ea09da8104   655493523f60                "kube-scheduler --au…"   13 minutes ago   Up 13 minutes             k8s_kube-scheduler_kube-scheduler-minikube_kube-system_197cd0de602d7cb722d0bd2daf878121_0
+5b286cb63e5f   e9c08e11b07f                "kube-controller-man…"   13 minutes ago   Up 13 minutes             k8s_kube-controller-manager_kube-controller-manager-minikube_kube-system_5175bba984ed52052d891b5a45b584b6_0
+15b77fcf9364   fce326961ae2                "etcd --advertise-cl…"   13 minutes ago   Up 13 minutes             k8s_etcd_etcd-minikube_kube-system_a121e106627e5c6efa9ba48006cc43bf_0
+4d403e15ff80   registry.k8s.io/pause:3.6   "/pause"                 13 minutes ago   Up 13 minutes             k8s_POD_kube-controller-manager-minikube_kube-system_5175bba984ed52052d891b5a45b584b6_0
+860ddbbf06a7   registry.k8s.io/pause:3.6   "/pause"                 13 minutes ago   Up 13 minutes             k8s_POD_kube-scheduler-minikube_kube-system_197cd0de602d7cb722d0bd2daf878121_0
+2adab5fa2492   registry.k8s.io/pause:3.6   "/pause"                 13 minutes ago   Up 13 minutes             k8s_POD_etcd-minikube_kube-system_a121e106627e5c6efa9ba48006cc43bf_0
+docker@minikube:~$ 
+
+

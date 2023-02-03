@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod-1
+  namespace: kamran
+spec:
+  containers:
+  - name: container-4
+    image: nginx:latest
+  - name: container-5
+    image: kamzaidi/pythonnewimage
+
