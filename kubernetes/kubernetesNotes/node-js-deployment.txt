@@ -1,0 +1,63 @@
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ ls
+createNamespace.yaml  hub-django-app.yaml  hub-multictr-pod.yaml  hub-node-app.yaml  kubernetesNotes  minikube-linux-amd64  my-nodejs-deployment.yaml
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ cat my-nodejs-deployment.yaml 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment
+  namespace: kamran
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: node-app
+  template:
+    metadata:  
+      labels:
+        app: node-app
+    spec:
+      containers:
+      - name: node-js-ctr
+        image: kamzaidi/nodejs-todo-app 
+        ports:
+        - containerPort: 8000
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl apply -f my-nodejs-deployment.yaml 
+deployment.apps/my-deployment created
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl get pods -n kamran
+NAME                            READY   STATUS    RESTARTS   AGE
+my-deployment-b478fc9bc-95hqv   1/1     Running   0          14s
+my-deployment-b478fc9bc-dpgzb   1/1     Running   0          14s
+my-deployment-b478fc9bc-tcljf   1/1     Running   0          14s
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl get pods -n kamran -o wide
+NAME                            READY   STATUS    RESTARTS   AGE   IP            NODE       NOMINATED NODE   READINESS GATES
+my-deployment-b478fc9bc-95hqv   1/1     Running   0          47s   10.244.0.79   minikube   <none>           <none>
+my-deployment-b478fc9bc-dpgzb   1/1     Running   0          47s   10.244.0.77   minikube   <none>           <none>
+my-deployment-b478fc9bc-tcljf   1/1     Running   0          47s   10.244.0.78   minikube   <none>           <none>
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl delete pods -n kamran my-deployment-b478fc9bc-95hqv
+pod "my-deployment-b478fc9bc-95hqv" deleted
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl get pods -n kamran -o wide
+NAME                            READY   STATUS    RESTARTS   AGE   IP            NODE       NOMINATED NODE   READINESS GATES
+my-deployment-b478fc9bc-dpgzb   1/1     Running   0          2m    10.244.0.77   minikube   <none>           <none>
+my-deployment-b478fc9bc-nz6mw   1/1     Running   0          38s   10.244.0.80   minikube   <none>           <none>
+my-deployment-b478fc9bc-tcljf   1/1     Running   0          2m    10.244.0.78   minikube   <none>           <none>
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl delete -f my-nodejs-deployment.yaml 
+deployment.apps "my-deployment" deleted
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl get pods -n kamran -o wide
+NAME                            READY   STATUS        RESTARTS   AGE     IP            NODE       NOMINATED NODE   READINESS GATES
+my-deployment-b478fc9bc-dpgzb   1/1     Terminating   0          2m25s   10.244.0.77   minikube   <none>           <none>
+my-deployment-b478fc9bc-nz6mw   1/1     Terminating   0          63s     10.244.0.80   minikube   <none>           <none>
+my-deployment-b478fc9bc-tcljf   1/1     Terminating   0          2m25s   10.244.0.78   minikube   <none>           <none>
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl get pods -n kamran -o wide
+No resources found in kamran namespace.
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ cd ..
+
