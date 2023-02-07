@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-two-ctr-deployment
+  namespace: kamran
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: apps
+  template:
+    metadata:  
+      labels:
+        app: apps
+    spec:
+      containers:
+      - name: django-ctr
+        image: kamzaidi/django-todo-app
+        ports:
+        - containerPort: 8001
+      - name: node-js-ctr
+        image: kamzaidi/nodejs-todo-app
+        ports:
+        - containerPort: 8000
+
+

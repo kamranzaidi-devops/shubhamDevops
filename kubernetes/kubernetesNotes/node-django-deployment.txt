@@ -1,0 +1,89 @@
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ ls
+createNamespace.yaml  hub-django-app.yaml  hub-multictr-pod.yaml  hub-node-app.yaml  kubernetesNotes  minikube-linux-amd64  multi-ctr-deployment.yaml  my-nodejs-deployment.yaml
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ cat multi-ctr-deployment.yaml 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment
+  namespace: kamran
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: apps
+  template:
+    metadata:  
+      labels:
+        app: apps
+    spec:
+      containers:
+      - name: django-ctr
+        image: kamzaidi/django-todo-app
+        ports:
+        - containerPort: 8001
+      - name: node-js-ctr
+        image: kamzaidi/nodejs-todo-app
+        ports:
+        - containerPort: 8000
+
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl get pods -n kamran
+No resources found in kamran namespace.
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl apply -f multi-ctr-deployment.yaml 
+deployment.apps/my-deployment created
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl get pods -n kamran
+NAME                             READY   STATUS              RESTARTS   AGE
+my-deployment-6d4964fdf6-cp7lr   0/2     ContainerCreating   0          11s
+my-deployment-6d4964fdf6-snz87   0/2     ContainerCreating   0          11s
+my-deployment-6d4964fdf6-zcjc5   0/2     ContainerCreating   0          11s
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl get pods -n kamran
+NAME                             READY   STATUS    RESTARTS   AGE
+my-deployment-6d4964fdf6-cp7lr   2/2     Running   0          22s
+my-deployment-6d4964fdf6-snz87   2/2     Running   0          22s
+my-deployment-6d4964fdf6-zcjc5   2/2     Running   0          22s
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl get pods -n kamran -o wide
+NAME                             READY   STATUS    RESTARTS   AGE   IP            NODE       NOMINATED NODE   READINESS GATES
+my-deployment-6d4964fdf6-cp7lr   2/2     Running   0          57s   10.244.0.82   minikube   <none>           <none>
+my-deployment-6d4964fdf6-snz87   2/2     Running   0          57s   10.244.0.81   minikube   <none>           <none>
+my-deployment-6d4964fdf6-zcjc5   2/2     Running   0          57s   10.244.0.83   minikube   <none>           <none>
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ minikube ssh
+Last login: Tue Feb  7 06:03:31 2023 from 192.168.49.1
+docker@minikube:~$ docker ps 
+CONTAINER ID   IMAGE                       COMMAND                  CREATED              STATUS              PORTS     NAMES
+b5c451aa29b1   kamzaidi/nodejs-todo-app    "node app.js nohup b…"   52 seconds ago       Up 52 seconds                 k8s_node-js-ctr_my-deployment-6d4964fdf6-cp7lr_kamran_fda90764-b28a-44b0-ad1a-4fa69bb823c6_0
+04684fa2d414   kamzaidi/nodejs-todo-app    "node app.js nohup b…"   55 seconds ago       Up 54 seconds                 k8s_node-js-ctr_my-deployment-6d4964fdf6-zcjc5_kamran_299575a3-450e-423a-8ed2-891aae161c53_0
+2371f8108b3f   kamzaidi/nodejs-todo-app    "node app.js nohup b…"   58 seconds ago       Up 57 seconds                 k8s_node-js-ctr_my-deployment-6d4964fdf6-snz87_kamran_2f0077c9-79b7-4c8c-a65f-946aa76ab5ef_0
+12cabec26275   kamzaidi/django-todo-app    "python manage.py ru…"   About a minute ago   Up About a minute             k8s_django-ctr_my-deployment-6d4964fdf6-cp7lr_kamran_fda90764-b28a-44b0-ad1a-4fa69bb823c6_0
+676bff102de2   kamzaidi/django-todo-app    "python manage.py ru…"   About a minute ago   Up About a minute             k8s_django-ctr_my-deployment-6d4964fdf6-zcjc5_kamran_299575a3-450e-423a-8ed2-891aae161c53_0
+6d25dd5b5808   kamzaidi/django-todo-app    "python manage.py ru…"   About a minute ago   Up About a minute             k8s_django-ctr_my-deployment-6d4964fdf6-snz87_kamran_2f0077c9-79b7-4c8c-a65f-946aa76ab5ef_0
+f3c24b8291b0   registry.k8s.io/pause:3.6   "/pause"                 About a minute ago   Up About a minute             k8s_POD_my-deployment-6d4964fdf6-zcjc5_kamran_299575a3-450e-423a-8ed2-891aae161c53_0
+9f2d1df41194   registry.k8s.io/pause:3.6   "/pause"                 About a minute ago   Up About a minute             k8s_POD_my-deployment-6d4964fdf6-cp7lr_kamran_fda90764-b28a-44b0-ad1a-4fa69bb823c6_0
+d731330338af   registry.k8s.io/pause:3.6   "/pause"                 About a minute ago   Up About a minute             k8s_POD_my-deployment-6d4964fdf6-snz87_kamran_2f0077c9-79b7-4c8c-a65f-946aa76ab5ef_0
+625a53d3e1a5   07655ddf2eeb                "/dashboard --insecu…"   2 hours ago          Up 2 hours                    k8s_kubernetes-dashboard_kubernetes-dashboard-55c4cbbc7c-xm4pn_kubernetes-dashboard_d10fb63e-bc85-490d-884f-220070219708_6
+1410e4c01714   6e38f40d628d                "/storage-provisioner"   2 hours ago          Up 2 hours                    k8s_storage-provisioner_storage-provisioner_kube-system_95123c19-8ceb-4723-8ac1-015391b79fa9_17
+c28fa3c35ad4   295c7be07902                "nginx -g 'daemon of…"   2 hours ago          Up 2 hours                    k8s_nginx_nginx-ctr_django-todo-appln_320fa936-db4d-4d0b-a56a-8c3d6a3698ba_4
+62caef32712a   46a6bb3c77ce                "/usr/local/bin/kube…"   2 hours ago          Up 2 hours                    k8s_kube-proxy_kube-proxy-5czxd_kube-system_fbbb6d71-08cf-46e9-a584-b6365374adf2_9
+84950c93010d   registry.k8s.io/pause:3.6   "/pause"                 2 hours ago          Up 2 hours                    k8s_POD_nginx-ctr_django-todo-appln_320fa936-db4d-4d0b-a56a-8c3d6a3698ba_4
+10a933522924   registry.k8s.io/pause:3.6   "/pause"                 2 hours ago          Up 2 hours                    k8s_POD_kube-proxy-5czxd_kube-system_fbbb6d71-08cf-46e9-a584-b6365374adf2_9
+cc2c87ef1c91   registry.k8s.io/pause:3.6   "/pause"                 2 hours ago          Up 2 hours                    k8s_POD_kubernetes-dashboard-55c4cbbc7c-xm4pn_kubernetes-dashboard_d10fb63e-bc85-490d-884f-220070219708_6
+86aa4ce54573   115053965e86                "/metrics-sidecar"       2 hours ago          Up 2 hours                    k8s_dashboard-metrics-scraper_dashboard-metrics-scraper-5c6664855-bbs5z_kubernetes-dashboard_16db9cc3-207e-45a9-bf82-1d272f738ed4_3
+fd50dc138906   5185b96f0bec                "/coredns -conf /etc…"   2 hours ago          Up 2 hours                    k8s_coredns_coredns-787d4945fb-42t5w_kube-system_50375a5c-1aad-43c9-8c66-f22e085ad4a3_9
+e84e50da3106   registry.k8s.io/pause:3.6   "/pause"                 2 hours ago          Up 2 hours                    k8s_POD_dashboard-metrics-scraper-5c6664855-bbs5z_kubernetes-dashboard_16db9cc3-207e-45a9-bf82-1d272f738ed4_7
+3b888f09290d   registry.k8s.io/pause:3.6   "/pause"                 2 hours ago          Up 2 hours                    k8s_POD_coredns-787d4945fb-42t5w_kube-system_50375a5c-1aad-43c9-8c66-f22e085ad4a3_9
+401f8c757015   registry.k8s.io/pause:3.6   "/pause"                 2 hours ago          Up 2 hours                    k8s_POD_storage-provisioner_kube-system_95123c19-8ceb-4723-8ac1-015391b79fa9_9
+516863466ed8   fce326961ae2                "etcd --advertise-cl…"   2 hours ago          Up 2 hours                    k8s_etcd_etcd-minikube_kube-system_a121e106627e5c6efa9ba48006cc43bf_9
+56aa90002b8c   e9c08e11b07f                "kube-controller-man…"   2 hours ago          Up 2 hours                    k8s_kube-controller-manager_kube-controller-manager-minikube_kube-system_5175bba984ed52052d891b5a45b584b6_10
+5b95d357e6c7   655493523f60                "kube-scheduler --au…"   2 hours ago          Up 2 hours                    k8s_kube-scheduler_kube-scheduler-minikube_kube-system_197cd0de602d7cb722d0bd2daf878121_10
+72d1a3556f10   deb04688c4a3                "kube-apiserver --ad…"   2 hours ago          Up 2 hours                    k8s_kube-apiserver_kube-apiserver-minikube_kube-system_5239bb256c1be9f71fd10c884d9299b1_10
+defdf6ca9b2a   registry.k8s.io/pause:3.6   "/pause"                 2 hours ago          Up 2 hours                    k8s_POD_kube-scheduler-minikube_kube-system_197cd0de602d7cb722d0bd2daf878121_10
+7a5eeb4a9b4e   registry.k8s.io/pause:3.6   "/pause"                 2 hours ago          Up 2 hours                    k8s_POD_kube-controller-manager-minikube_kube-system_5175bba984ed52052d891b5a45b584b6_9
+ff37580f1c81   registry.k8s.io/pause:3.6   "/pause"                 2 hours ago          Up 2 hours                    k8s_POD_kube-apiserver-minikube_kube-system_5239bb256c1be9f71fd10c884d9299b1_10
+0700923c67ad   registry.k8s.io/pause:3.6   "/pause"                 2 hours ago          Up 2 hours                    k8s_POD_etcd-minikube_kube-system_a121e106627e5c6efa9ba48006cc43bf_9
+docker@minikube:~$ 
+
