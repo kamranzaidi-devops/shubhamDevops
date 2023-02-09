@@ -1,0 +1,189 @@
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ cat my-nodejs-deployment.yaml 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment
+  namespace: kamran
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: node-app
+  template:
+    metadata:  
+      labels:
+        app: node-app
+    spec:
+      containers:
+      - name: node-js-ctr
+        image: kamzaidi/nodejs-todo-app 
+        ports:
+        - containerPort: 8000
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ ls
+createNamespace.yaml  hub-django-app.yaml  hub-multictr-pod.yaml  hub-node-app.yaml  kubernetesNotes  minikube-linux-amd64  multi-ctr-deployment.yaml  my-nodejs-deployment.yaml
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ vim  service.yaml
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ cat service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-services
+  namespace: kamran
+
+spec:
+  selector:
+      app: node-app
+  type: NodePort
+  
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 3796
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl apply -f service.yaml
+service/my-services created
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl get svc -n kamran
+NAME          TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+my-services   ClusterIP   10.103.246.224   <none>        8000/TCP   23s
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ miniukube service my-service -n kamran
+miniukube: command not found
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ minikube service my-service -n kamran
+
+❌  Exiting due to SVC_NOT_FOUND: Service 'my-service' was not found in 'kamran' namespace.
+You may select another namespace by using 'minikube service my-service -n <namespace>'. Or list out all the services using 'minikube service list'
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ minikube service my-services -n kamran
+|-----------|-------------|-------------|--------------|
+| NAMESPACE |    NAME     | TARGET PORT |     URL      |
+|-----------|-------------|-------------|--------------|
+| kamran    | my-services |             | No node port |
+|-----------|-------------|-------------|--------------|
+😿  service kamran/my-services has no node port
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ vim  service.yaml
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl apply -f service.yaml
+service/my-services configured
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ minikube service my-services -n kamran
+|-----------|-------------|-------------|--------------|
+| NAMESPACE |    NAME     | TARGET PORT |     URL      |
+|-----------|-------------|-------------|--------------|
+| kamran    | my-services |             | No node port |
+|-----------|-------------|-------------|--------------|
+😿  service kamran/my-services has no node port
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ vim  service.yaml
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl apply -f service.yaml
+service/my-services configured
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ minikube service my-services -n kamran
+|-----------|-------------|-------------|---------------------------|
+| NAMESPACE |    NAME     | TARGET PORT |            URL            |
+|-----------|-------------|-------------|---------------------------|
+| kamran    | my-services |        8000 | http://192.168.49.2:31655 |
+|-----------|-------------|-------------|---------------------------|
+🎉  Opening service kamran/my-services in default browser...
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ update.go:85: cannot change mount namespace according to change mount (/var/lib/snapd/hostfs/usr/share/gimp/2.0/help /usr/share/gimp/2.0/help none bind,ro 0 0): cannot open directory "/var/lib": permission denied
+update.go:85: cannot change mount namespace according to change mount (/var/lib/snapd/hostfs/usr/share/xubuntu-docs /usr/share/xubuntu-docs none bind,ro 0 0): cannot open directory "/var/lib": permission denied
+Gtk-Message: 11:32:07.608: Not loading module "atk-bridge": The functionality is provided by GTK natively. Please try to not load it.
+[GFX1-]: glxtest: VA-API test failed: no supported VAAPI profile found.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+ATTENTION: default value of option mesa_glthread overridden by environment.
+minikube service my-services -n kamran^C
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ minikube service my-services -n kamran --url
+http://192.168.49.2:31655
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ curl -L http://192.168.49.2:31655
+curl: (7) Failed to connect to 192.168.49.2 port 31655 after 0 ms: Connection refused
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ minikube service my-services
+
+❌  Exiting due to SVC_NOT_FOUND: Service 'my-services' was not found in 'default' namespace.
+You may select another namespace by using 'minikube service my-services -n <namespace>'. Or list out all the services using 'minikube service list'
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ minikube service my-services -n kamran
+|-----------|-------------|-------------|---------------------------|
+| NAMESPACE |    NAME     | TARGET PORT |            URL            |
+|-----------|-------------|-------------|---------------------------|
+| kamran    | my-services |        8000 | http://192.168.49.2:31655 |
+|-----------|-------------|-------------|---------------------------|
+🎉  Opening service kamran/my-services in default browser...
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ Gtk-Message: 11:42:32.134: Not loading module "atk-bridge": The functionality is provided by GTK natively. Please try to not load it.
+^C
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ vim service.yaml 
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ cat vim service.yaml 
+cat: vim: No such file or directory
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-services
+  namespace: kamran
+
+spec:
+  selector:
+      app: node-app
+  type: NodePort
+  
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+ 
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl delete -f service.yaml
+service "my-services" deleted
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ kubectl apply -f service.yaml
+service/my-services created
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ minikube service my-services -n kamran --url
+http://192.168.49.2:32236
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes/kubernetesNotes$ curl -L http://192.168.49.2:32236
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <title>My shaandaar todolist</title>
+        <style>
+            a {
+                text-decoration: none;
+                color: black;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <h1>TrainWithShubham Community is Super Awesome</h1>
+        <ul>
+            
+        </ul>
+
+        <form action="/todo/add/" method="post">
+            <p>
+                <label for="newtodo">What shoud I do?</label>
+                <input type="text" name="newtodo" id="newtodo" autofocus />
+                <input type="submit" value="Add" />
+            </p>
+        </form>
+    </body>
+
+</html>
+
+
+kamran@kamran-System-Product-Name:~/gitFolder/kubernetes$ ls
+createNamespace.yaml  hub-django-app.yaml  hub-multictr-pod.yaml  hub-node-app.yaml  kubernetesNotes  minikube-linux-amd64  multi-ctr-deployment.yaml  my-nodejs-deployment.yaml  service.yaml
+

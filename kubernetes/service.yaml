@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-services
+  namespace: kamran
+
+spec:
+  selector:
+      app: node-app
+  type: NodePort
+  
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+
