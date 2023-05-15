@@ -1,0 +1,59 @@
+kamran@kamran-System-Product-Name:~/DeployApps/reactJSWebApp-1/react-gym-website-master$ ls
+Dockerfile.dev  package.json  public  README.md  src
+
+kamran@kamran-System-Product-Name:~/DeployApps/reactJSWebApp-1/react-gym-website-master$ cat Dockerfile.dev 
+FROM node:16-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["npm","start"]
+
+
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+kamran@kamran-System-Product-Name:~/DeployApps/reactJSWebApp-1/react-gym-website-master$ ls
+Dockerfile.dev  package.json  public  README.md  src
+
+kamran@kamran-System-Product-Name:~/DeployApps/reactJSWebApp-1/react-gym-website-master$ docker build -f Dockerfile.dev -t reactgymapp .
+[+] Building 1.8s (11/11) FINISHED                                                                                                                                                                         
+ => [internal] load build definition from Dockerfile.dev                                                                                                                                              0.0s
+ => => transferring dockerfile: 35B                                                                                                                                                                   0.0s
+ => [internal] load .dockerignore                                                                                                                                                                     0.0s
+ => => transferring context: 2B                                                                                                                                                                       0.0s
+ => [internal] load metadata for docker.io/library/node:16-alpine                                                                                                                                     1.8s
+ => [auth] library/node:pull token for registry-1.docker.io                                                                                                                                           0.0s
+ => [1/5] FROM docker.io/library/node:16-alpine@sha256:f1657204d3463bce763cefa5b25e48c28af6fe0cdb0f68b354f0f8225ef61be7                                                                               0.0s
+ => [internal] load build context                                                                                                                                                                     0.0s
+ => => transferring context: 3.00kB                                                                                                                                                                   0.0s
+ => CACHED [2/5] WORKDIR /app                                                                                                                                                                         0.0s
+ => CACHED [3/5] COPY package*.json ./                                                                                                                                                                0.0s
+ => CACHED [4/5] RUN npm install                                                                                                                                                                      0.0s
+ => CACHED [5/5] COPY . .                                                                                                                                                                             0.0s
+ => exporting to image                                                                                                                                                                                0.0s
+ => => exporting layers                                                                                                                                                                               0.0s
+ => => writing image sha256:5c4c4886dde6dcd29348e9cb111ed6fac5027cca3e47fafd06180e33d595918c                                                                                                          0.0s
+ => => naming to docker.io/library/reactgymapp                                                                                                                                                        0.0s
+
+kamran@kamran-System-Product-Name:~/DeployApps/reactJSWebApp-1/react-gym-website-master$ docker images
+REPOSITORY    TAG       IMAGE ID       CREATED          SIZE
+reactgymapp   latest    5c4c4886dde6   23 minutes ago   514MB
+
+kamran@kamran-System-Product-Name:~/DeployApps/reactJSWebApp-1/react-gym-website-master$ docker run -d -p 3000:3000 reactgymapp
+b91063a1da164eb31081ef30f1f99b6efd18ab1992f1bc98f5b38046fb0067f8
+
+
+kamran@kamran-System-Product-Name:~/DeployApps/reactJSWebApp-1/react-gym-website-master$ docker ps -a
+CONTAINER ID   IMAGE         COMMAND                  CREATED         STATUS                     PORTS     NAMES
+b91063a1da16   reactgymapp   "docker-entrypoint.s…"   2 minutes ago   Exited (0) 2 minutes ago             quirky_snyder
+
+kamran@kamran-System-Product-Name:~/DeployApps/reactJSWebApp-1/react-gym-website-master$ 
+
+
