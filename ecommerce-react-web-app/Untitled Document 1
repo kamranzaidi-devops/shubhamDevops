@@ -1,0 +1,54 @@
+kamran@kamran-System-Product-Name:~/DeployApps/ecom_web_app/grocery-ecommerce-website$ ls
+Dockerfile.dev  package.json  public  README.md  src
+
+kamran@kamran-System-Product-Name:~/DeployApps/ecom_web_app/grocery-ecommerce-website$ cat Dockerfile.dev 
+FROM node:16-alpine
+
+WORKDIR /app
+
+COPY package.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["npm","start"]
+
+kamran@kamran-System-Product-Name:~/DeployApps/ecom_web_app/grocery-ecommerce-website$ docker build -f Dockerfile.dev -t ecom-react-web-app .
+[+] Building 1.8s (11/11) FINISHED                                                                                                                                                                         
+ => [internal] load build definition from Dockerfile.dev                                                                                                                                              0.0s
+ => => transferring dockerfile: 35B                                                                                                                                                                   0.0s
+ => [internal] load .dockerignore                                                                                                                                                                     0.0s
+ => => transferring context: 2B                                                                                                                                                                       0.0s
+ => [internal] load metadata for docker.io/library/node:16-alpine                                                                                                                                     1.7s
+ => [auth] library/node:pull token for registry-1.docker.io                                                                                                                                           0.0s
+ => [internal] load build context                                                                                                                                                                     0.0s
+ => => transferring context: 10.97kB                                                                                                                                                                  0.0s
+ => [1/5] FROM docker.io/library/node:16-alpine@sha256:f1657204d3463bce763cefa5b25e48c28af6fe0cdb0f68b354f0f8225ef61be7                                                                               0.0s
+ => CACHED [2/5] WORKDIR /app                                                                                                                                                                         0.0s
+ => CACHED [3/5] COPY package.json ./                                                                                                                                                                 0.0s
+ => CACHED [4/5] RUN npm install                                                                                                                                                                      0.0s
+ => CACHED [5/5] COPY . .                                                                                                                                                                             0.0s
+ => exporting to image                                                                                                                                                                                0.0s
+ => => exporting layers                                                                                                                                                                               0.0s
+ => => writing image sha256:78f6394acda31e510ba6a990c09c3e7b94543ff9c246f16b63548beb72441ad6                                                                                                          0.0s
+ => => naming to docker.io/library/ecom-react-web-app                                                                                                                                                 0.0s
+
+kamran@kamran-System-Product-Name:~/DeployApps/ecom_web_app/grocery-ecommerce-website$ docker images
+REPOSITORY           TAG       IMAGE ID       CREATED         SIZE
+ecom-react-web-app   latest    78f6394acda3   6 minutes ago   571MB
+
+kamran@kamran-System-Product-Name:~/DeployApps/ecom_web_app/grocery-ecommerce-website$ docker run -it -p 3000:3000 --name ecomerce-react-ctr ecom-react-web-app
+
+Compiled successfully!
+
+You can now view ecommerce in the browser.
+
+  Local:            http://localhost:3000
+  On Your Network:  http://172.17.0.2:3000
+
+Note that the development build is not optimized.
+To create a production build, use npm run build.
+
